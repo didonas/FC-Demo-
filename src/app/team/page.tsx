@@ -3,14 +3,34 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { playersData } from "@/data/playersData";
-import { clubData } from "@/data/clubData";
-import { PlayerPosition } from "@/types";
 import { ArrowRight, User } from "lucide-react";
 
 export default function TeamPage() {
   const [selectedPosition, setSelectedPosition] = useState<string>("All");
 
-  const positions = ["All", "Goalkeeper", "Defender", "Midfielder", "Forward"];
+  const positions = [
+    { label: "All Players", value: "All", count: playersData.length },
+    {
+      label: "Goalkeepers",
+      value: "Goalkeeper",
+      count: playersData.filter((p) => p.position === "Goalkeeper").length,
+    },
+    {
+      label: "Defenders",
+      value: "Defender",
+      count: playersData.filter((p) => p.position === "Defender").length,
+    },
+    {
+      label: "Midfielders",
+      value: "Midfielder",
+      count: playersData.filter((p) => p.position === "Midfielder").length,
+    },
+    {
+      label: "Forwards",
+      value: "Forward",
+      count: playersData.filter((p) => p.position === "Forward").length,
+    },
+  ];
 
   const filteredPlayers =
     selectedPosition === "All"
@@ -20,14 +40,14 @@ export default function TeamPage() {
   return (
     <div className="bg-[#F4F1E9] min-h-screen">
       {/* Hero Banner */}
-      <section className="relative py-16 sm:py-24 bg-navy text-porcelain">
+      <section className="relative pt-16 pb-20 sm:pt-24 sm:pb-28 bg-navy text-porcelain">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1800&q=80')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/85 to-navy/60" />
 
         <div className="site-container relative z-10 text-center max-w-3xl mx-auto">
           <span className="text-xs font-heading font-black tracking-[0.24em] text-copper uppercase block mb-3">
@@ -42,21 +62,68 @@ export default function TeamPage() {
         </div>
       </section>
 
+      {/* Official Squad Photograph Showcase */}
+      <section className="relative z-20 -mt-10 sm:-mt-16 mb-4 sm:mb-8">
+        <div className="site-container">
+          <div className="rounded-3xl overflow-hidden bg-navy border-2 border-porcelain-300 shadow-2xl relative group">
+            <div className="relative aspect-[16/9] w-full bg-navy flex items-center justify-center overflow-hidden">
+              <img
+                src="/images/team/squad-2026.webp"
+                alt="Tamilnadu FC Official First Team Squad 2026/27"
+                className="w-full h-full object-cover sm:object-contain bg-navy"
+                loading="eager"
+              />
+              {/* Subtle gradient vignette at bottom */}
+              <div className="absolute inset-x-0 bottom-0 h-24 sm:h-32 bg-gradient-to-t from-navy/95 via-navy/40 to-transparent pointer-events-none" />
+
+              {/* Squad Photo Caption Banner */}
+              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 right-4 sm:right-8 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-porcelain">
+                <div>
+                  <span className="text-[10px] sm:text-xs font-heading font-black tracking-[0.2em] text-copper uppercase block">
+                    Official Squad Photograph 2026/27
+                  </span>
+                  <h2 className="font-heading font-bold text-base sm:text-xl text-porcelain">
+                    Tamilnadu Football Club • First Team XI
+                  </h2>
+                </div>
+                <div className="flex items-center gap-3 text-[11px] sm:text-xs text-porcelain/75 font-heading">
+                  <span className="px-3 py-1 rounded-full bg-navy/80 border border-porcelain/20 backdrop-blur-sm">
+                    11 Players
+                  </span>
+                  <span className="hidden md:inline-block text-porcelain/60">
+                    The Meridian Stadium • Chennai
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Position Filter Bar */}
-      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-4">
+      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-4 shadow-sm">
         <div className="site-container flex items-center justify-center">
           <div className="flex flex-wrap items-center justify-center gap-2">
             {positions.map((pos) => (
               <button
-                key={pos}
-                onClick={() => setSelectedPosition(pos)}
-                className={`px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-200 ${
-                  selectedPosition === pos
+                key={pos.value}
+                onClick={() => setSelectedPosition(pos.value)}
+                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
+                  selectedPosition === pos.value
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80 hover:text-navy"
                 }`}
               >
-                {pos === "All" ? "All Players" : `${pos}s`}
+                <span>{pos.label}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                    selectedPosition === pos.value
+                      ? "bg-copper text-porcelain"
+                      : "bg-porcelain-300 text-navy/70"
+                  }`}
+                >
+                  {pos.count}
+                </span>
               </button>
             ))}
           </div>
@@ -102,32 +169,32 @@ export default function TeamPage() {
                   </div>
                 </div>
 
-                {/* Player Quick Stats Snapshot */}
+                {/* Player Quick Stats Snapshot with refined vertical spacing */}
                 <div className="p-5 bg-white space-y-4">
-                  <div className="grid grid-cols-3 gap-2 text-center py-2 bg-porcelain-50 rounded-2xl border border-porcelain-200">
+                  <div className="grid grid-cols-3 gap-2 text-center pt-3.5 pb-3 px-2 sm:px-3 bg-porcelain-50 rounded-2xl border border-porcelain-200">
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/50 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         Appearances
                       </span>
-                      <strong className="font-heading font-bold text-sm text-navy block mt-0.5">
+                      <strong className="font-heading font-bold text-sm text-navy block mt-1">
                         {player.stats.appearances}
                       </strong>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/50 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         {player.position === "Goalkeeper" ? "Clean Sheets" : "Goals"}
                       </span>
-                      <strong className="font-heading font-bold text-sm text-copper block mt-0.5">
+                      <strong className="font-heading font-bold text-sm text-copper block mt-1">
                         {player.position === "Goalkeeper"
                           ? player.stats.cleanSheets || 0
                           : player.stats.goals}
                       </strong>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/50 font-medium block">
+                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         {player.position === "Goalkeeper" ? "Saves Rate" : "Assists"}
                       </span>
-                      <strong className="font-heading font-bold text-sm text-navy block mt-0.5">
+                      <strong className="font-heading font-bold text-sm text-navy block mt-1">
                         {player.position === "Goalkeeper"
                           ? `${player.stats.passingAccuracy}%`
                           : player.stats.assists}
@@ -136,7 +203,9 @@ export default function TeamPage() {
                   </div>
 
                   <div className="flex items-center justify-between text-xs text-navy/70 pt-2 border-t border-porcelain-200">
-                    <span>Age: <strong>{player.age}</strong> • {player.height}</span>
+                    <span>
+                      Age: <strong>{player.age}</strong> • {player.height}
+                    </span>
                     <span className="font-heading font-bold text-navy group-hover:text-copper transition-colors flex items-center gap-1 uppercase tracking-wider text-[11px]">
                       Profile <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </span>

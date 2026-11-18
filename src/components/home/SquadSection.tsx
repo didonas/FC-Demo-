@@ -30,7 +30,7 @@ export const SquadSection: React.FC = () => {
             href="/team"
             className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy hover:text-copper transition-colors group"
           >
-            <span>Explore All 18 Players</span>
+            <span>Explore Full Squad</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
