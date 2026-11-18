@@ -31,7 +31,7 @@ export const newsData: NewsItem[] = [
     category: "Match Report",
     publishDate: "16 Nov 2026",
     readTime: "5 min read",
-    heroImage: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80",
+    heroImage: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=80",
     content: [
       "In front of 61,840 passionate supporters bathed in Atlantic Navy and Porcelain, Tamilnadu FC delivered their most commanding performance of the season, brushing aside Kerala Blasters 3-1 at The Meridian Stadium.",
       "The opening goal arrived in the 18th minute courtesy of a sumptuous set-piece delivery from Arjun Varadhan, headed emphatically home by vice-captain Vikram Saravanan.",

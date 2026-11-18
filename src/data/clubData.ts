@@ -102,7 +102,7 @@ export const clubData = {
       title: "Founding at the Marina Sands",
       description:
         "Maritime merchants, university athletes, and local sportsmen unite under the Coromandel sky to establish Tamilnadu Football Club, playing initial friendlies against visiting sailors.",
-      image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=80",
+      image: "/images/history/archive-1934-founding.webp",
     },
     {
       year: "1958",

@@ -31,7 +31,7 @@ export default function ClubPage() {
         <div
           className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1800&q=80')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=1800&q=80')`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/40" />

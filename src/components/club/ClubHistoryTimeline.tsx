@@ -286,9 +286,11 @@ export const ClubHistoryTimeline: React.FC<ClubHistoryTimelineProps> = ({ timeli
                           transitionDelay: prefersReducedMotion ? "0ms" : "180ms",
                         }}
                       >
-                        <div
-                          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                          style={{ backgroundImage: `url('${event.image}')` }}
+                        <img
+                          src={event.image}
+                          alt={`Tamilnadu FC ${event.year} — ${event.title}`}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent pointer-events-none" />
 
