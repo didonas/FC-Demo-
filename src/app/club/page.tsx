@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { clubData } from "@/data/clubData";
 import { ClubCrest } from "@/components/brand/ClubCrest";
+import { ClubHistoryTimeline } from "@/components/club/ClubHistoryTimeline";
 import { Trophy, Award, Shield, Globe, Users, ArrowRight, Compass, CheckCircle } from "lucide-react";
 
 export const metadata = {
@@ -103,57 +104,7 @@ export default function ClubPage() {
       </section>
 
       {/* Historical Timeline */}
-      <section className="py-16 sm:py-24 bg-porcelain-100/70 border-y border-porcelain-200">
-        <div className="site-container">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="h-[2px] w-6 bg-copper" />
-              <span className="text-xs font-heading font-black tracking-[0.2em] text-copper uppercase">
-                Chronicle of Glory
-              </span>
-              <span className="h-[2px] w-6 bg-copper" />
-            </div>
-            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-navy">
-              Nine Decades of Heritage
-            </h2>
-            <p className="text-xs sm:text-sm text-navy/70 mt-2">
-              From colonial beachside matches in 1934 to continental conquests in the 21st century.
-            </p>
-          </div>
-
-          <div className="space-y-12">
-            {clubData.timeline.map((event, index) => (
-              <div
-                key={event.year}
-                className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ${
-                  index % 2 === 1 ? "lg:flex-row-reverse" : ""
-                }`}
-              >
-                <div className={`lg:col-span-6 ${index % 2 === 1 ? "lg:order-2" : ""}`}>
-                  <div className="rounded-3xl overflow-hidden aspect-[16/10] bg-navy relative border border-porcelain-300 shadow-md">
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
-                      style={{ backgroundImage: `url('${event.image}')` }}
-                    />
-                  </div>
-                </div>
-
-                <div className={`lg:col-span-6 space-y-4 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <span className="font-heading font-black text-4xl sm:text-5xl text-copper block">
-                    {event.year}
-                  </span>
-                  <h3 className="font-heading font-extrabold text-2xl text-navy">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-navy/75 leading-relaxed">
-                    {event.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ClubHistoryTimeline timeline={clubData.timeline} />
 
       {/* Trophy Cabinet / Honours */}
       <section id="honours" className="py-16 sm:py-24">
