@@ -58,7 +58,13 @@ export default function ProductDetailPage() {
   };
 
   const relatedProducts = productsData
-    .filter((p) => p.id !== product.id && p.category === product.category)
+    .filter(
+      (p) =>
+        p.id !== product.id &&
+        p.category === product.category &&
+        p.isPublished !== false &&
+        p.status !== "draft"
+    )
     .slice(0, 3);
 
   return (

@@ -8,7 +8,14 @@ import { ArrowRight, ShoppingBag, Check } from "lucide-react";
 
 export const MerchandiseSection: React.FC = () => {
   const { addItem } = useCart();
-  const featuredKits = productsData.filter((p) => p.category === "Match Kits" || p.category === "Kits").slice(0, 3);
+  const featuredKits = productsData
+    .filter(
+      (p) =>
+        (p.category === "Match Kits" || p.category === "Kits") &&
+        p.isPublished !== false &&
+        p.status !== "draft"
+    )
+    .slice(0, 3);
   const scarf = productsData.find((p) => p.id === "acc-scarf") || productsData[3];
 
   const handleQuickAdd = (product: typeof productsData[0]) => {

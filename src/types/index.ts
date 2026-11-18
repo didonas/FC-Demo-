@@ -130,6 +130,10 @@ export interface Product {
   features: string[];
   customizable?: boolean; // allow adding name & number
   isFeatured?: boolean;
+  status?: "published" | "draft";
+  isPublished?: boolean;
+  imageFit?: "cover" | "contain";
+  imagePosition?: string;
 }
 
 export interface CartItem {

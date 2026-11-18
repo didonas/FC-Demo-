@@ -18,7 +18,7 @@ export default function StorePage() {
 
   // Filter & Sort
   const filteredProducts = useMemo(() => {
-    let list = [...productsData];
+    let list = productsData.filter((p) => p.isPublished !== false && p.status !== "draft");
 
     if (selectedCategory !== "All") {
       list = list.filter((p) => p.category === selectedCategory);
