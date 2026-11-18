@@ -2,7 +2,7 @@ import { Product } from "@/types";
 
 export const productsData: Product[] = [
   // =========================================================================
-  // PUBLISHED PRODUCTS WITH AUTHENTIC PRODUCT PHOTOGRAPHY
+  // 1. OFFICIAL MATCH KITS
   // =========================================================================
   {
     id: "kit-home-2026",
@@ -15,20 +15,19 @@ export const productsData: Product[] = [
     badge: "Official Match",
     status: "published",
     isPublished: true,
-    imageFit: "cover",
+    imageFit: "contain",
     images: {
-      front: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-      lifestyle: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1200&q=85",
+      front: "/images/store/home-jersey-isolated.jpg",
+      back: "/images/store/home-jersey-isolated.jpg",
+      detail: "/images/store/home-jersey-isolated.jpg",
     },
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     description:
-      "The 2026/27 Tamilnadu FC Home Jersey — 'The Heritage' — bridges ninety years of Coromandel football history with cutting-edge athletic innovation. Crafted from an exquisite porcelain-ivory jacquard fabric woven with subtle Tamil architectural geometry, it is framed by deep Atlantic Navy ribbed cuffs and refined Burnished Copper collar piping. Finished with a silicone-embossed official club crest and inner-collar inscription: 'ONE STATE. ONE PASSION.'",
+      "The 2026/27 Tamilnadu FC Home Jersey — 'The Heritage' — bridges ninety years of Coromandel football history with cutting-edge athletic innovation. Rendered in deep Atlantic Navy with contrast porcelain collar ribbing, burnished copper seam piping, and subtle engineered jacquard body striping. Finished with an authentic club crest and inner-collar inscription: 'ONE STATE. ONE PASSION.'",
     features: [
       "AeroWeave™ 100% recycled micro-polyester with rapid moisture-wicking technology",
-      "Woven architectural jacquard pattern inspired by Chola stone geometry",
-      "Laser-perforated ventilation panels along lateral torso and upper spine",
+      "Subtle engineered athletic jacquard weave",
+      "Contrast porcelain ribbed collar with burnished copper piping",
       "High-definition 3D silicone club crest with metallic copper accents",
       "Authentic player-issue athletic fit with bonded seamless hem",
       "Official holographic authentication tag with serial number at lower hem",
@@ -47,12 +46,10 @@ export const productsData: Product[] = [
     badge: "New Arrival",
     status: "published",
     isPublished: true,
-    imageFit: "cover",
     images: {
-      front: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-      lifestyle: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=1200&q=85",
+      front: "",
+      back: "",
+      detail: "",
     },
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     description:
@@ -77,12 +74,10 @@ export const productsData: Product[] = [
     badge: "Limited Edition",
     status: "published",
     isPublished: true,
-    imageFit: "cover",
     images: {
-      front: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-      lifestyle: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1200&q=85",
+      front: "",
+      back: "",
+      detail: "",
     },
     sizes: ["S", "M", "L", "XL"],
     description:
@@ -97,178 +92,6 @@ export const productsData: Product[] = [
     isFeatured: true,
   },
   {
-    id: "apparel-drill-top",
-    slug: "tech-drill-quarter-zip-top",
-    name: "Pro Tech Quarter-Zip Drill Top",
-    collection: "Training & Performance",
-    category: "Training",
-    price: 3299,
-    badge: "Bestseller",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    description:
-      "As worn by the first team during pre-match warmups and tactical training sessions at the Kovil Sports Complex. High-stretch fleece-backed Atlantic Navy body with thumb loops and protective storm flap.",
-    features: [
-      "Brushed micro-fleece interior for morning training warmth",
-      "Invisible thumb-loops in cuff seams",
-      "Reflective copper crest and rear collar insignia",
-      "Raglan shoulder construction ensuring freedom of motion",
-    ],
-    customizable: false,
-    isFeatured: true,
-  },
-  {
-    id: "apparel-track-jacket",
-    slug: "heritage-stadium-track-jacket",
-    name: "1934 Heritage Stadium Track Jacket",
-    collection: "Training & Performance",
-    category: "Training",
-    price: 3999,
-    badge: "Bestseller",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["XS", "S", "M", "L", "XL"],
-    description:
-      "A tribute to classic mid-century football track tops. Porcelain body with Atlantic Navy chevron panels and heavy antique metal zipper. Features embroidered 1934 founding year crest.",
-    features: [
-      "Heavyweight 340gsm double-knit cotton-poly blend",
-      "Antique copper zip hardware with engraved monogram pull",
-      "Ribbed collar, cuffs, and hem",
-      "Two zippered hand pockets with mesh lining",
-    ],
-    customizable: false,
-    isFeatured: true,
-  },
-  {
-    id: "apparel-hoodie",
-    slug: "monogram-heavyweight-hoodie",
-    name: "Coromandel Monogram Heavyweight Hoodie",
-    collection: "Club Fanwear",
-    category: "Fanwear",
-    price: 3499,
-    badge: "Bestseller",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    description:
-      "Relaxed cut, premium 420gsm organic French terry cotton. Atlantic navy with chenille TF monogram patch on left chest and tonal 'ONE STATE. ONE PASSION.' embroidery across the hood.",
-    features: [
-      "420gsm 100% organic combed ring-spun cotton",
-      "Chenille felt monogram badge with metallic copper outline",
-      "Double-layered hood with copper aglet drawstrings",
-      "Kangaroo pouch pocket with reinforced bartacks",
-    ],
-    customizable: false,
-    isFeatured: true,
-  },
-  {
-    id: "acc-scarf",
-    slug: "matchday-heritage-scarf",
-    name: "Official Matchday Knitted Scarf — One State",
-    collection: "Matchday & Accessories",
-    category: "Accessories",
-    price: 1199,
-    badge: "Bestseller",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["M"],
-    description:
-      "The classic supporter essential. Woven in Atlantic Navy and Porcelain with Burnished Copper fringing. Bold typography reading 'TAMILNADU FC' on one side and 'ONE STATE. ONE PASSION.' on the reverse.",
-    features: [
-      "100% premium soft-touch acrylic jacquard knit",
-      "Double-sided reversible typography",
-      "Hand-finished copper and navy fringe detailing",
-      "Dimensions: 145cm length x 18cm width",
-    ],
-    customizable: false,
-    isFeatured: true,
-  },
-  {
-    id: "acc-cap",
-    slug: "crest-structured-snapback-cap",
-    name: "Signature 3D Crest Snapback Cap",
-    collection: "Matchday & Accessories",
-    category: "Accessories",
-    price: 999,
-    badge: "Bestseller",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["M"],
-    description:
-      "Structured 6-panel profile in midnight Atlantic Navy wool blend with high-density raised rubberized club crest and copper under-visor detailing.",
-    features: [
-      "Wool-blend structured crown for lasting shape retention",
-      "Contrast copper under-visor reduces stadium glare",
-      "Adjustable snapback strap fits all head sizes",
-      "Embroidered ventilation eyelets",
-    ],
-    customizable: false,
-    isFeatured: false,
-  },
-  {
-    id: "acc-ball",
-    slug: "heritage-leather-commemorative-ball",
-    name: "1934 Commemorative Leather Football",
-    collection: "Matchday & Accessories",
-    category: "Accessories",
-    price: 2499,
-    badge: "Limited Edition",
-    status: "published",
-    isPublished: true,
-    imageFit: "cover",
-    images: {
-      front: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=85",
-      back: "https://images.unsplash.com/photo-1511886929837-354d827aae26?auto=format&fit=crop&w=1200&q=85",
-      detail: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=85",
-    },
-    sizes: ["M"],
-    description:
-      "A hand-stitched 18-panel genuine vintage leather football styled after the balls used in the club's 1934 founding season. Debossed with the original seal and packaged in a collector wooden display box.",
-    features: [
-      "100% full-grain tanned cowhide leather",
-      "Hand-sewn waxed cotton seams with rawhide valve lacing",
-      "Individually numbered certificate and display stand included",
-      "Debossed 1934 commemorative founding crest",
-    ],
-    customizable: false,
-    isFeatured: false,
-  },
-
-  // =========================================================================
-  // UNPUBLISHED PRODUCTS (PRESERVED IN DATABASE; AWAITING OFFICIAL PHOTOSHOOT)
-  // =========================================================================
-  {
     id: "kit-gk-2026",
     slug: "goalkeeper-kit-2026-guardian",
     name: "2026/27 Official Goalkeeper Jersey — The Guardian",
@@ -276,8 +99,8 @@ export const productsData: Product[] = [
     category: "Match Kits",
     price: 4299,
     badge: "Official Match",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -302,8 +125,8 @@ export const productsData: Product[] = [
     category: "Match Kits",
     price: 1899,
     badge: "Official Match",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -328,8 +151,8 @@ export const productsData: Product[] = [
     category: "Match Kits",
     price: 699,
     badge: "Official Match",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -345,6 +168,64 @@ export const productsData: Product[] = [
     customizable: false,
     isFeatured: false,
   },
+
+  // =========================================================================
+  // 2. TRAINING & PERFORMANCE
+  // =========================================================================
+  {
+    id: "apparel-drill-top",
+    slug: "tech-drill-quarter-zip-top",
+    name: "Pro Tech Quarter-Zip Drill Top",
+    collection: "Training & Performance",
+    category: "Training",
+    price: 3299,
+    badge: "Bestseller",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    description:
+      "As worn by the first team during pre-match warmups and tactical training sessions at the Kovil Sports Complex. High-stretch fleece-backed Atlantic Navy body with thumb loops and protective storm flap.",
+    features: [
+      "Brushed micro-fleece interior for morning training warmth",
+      "Invisible thumb-loops in cuff seams",
+      "Reflective copper crest and rear collar insignia",
+      "Raglan shoulder construction ensuring freedom of motion",
+    ],
+    customizable: false,
+    isFeatured: true,
+  },
+  {
+    id: "apparel-track-jacket",
+    slug: "heritage-stadium-track-jacket",
+    name: "1934 Heritage Stadium Track Jacket",
+    collection: "Training & Performance",
+    category: "Training",
+    price: 3999,
+    badge: "Bestseller",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description:
+      "A tribute to classic mid-century football track tops. Porcelain body with Atlantic Navy chevron panels and heavy antique metal zipper. Features embroidered 1934 founding year crest.",
+    features: [
+      "Heavyweight 340gsm double-knit cotton-poly blend",
+      "Antique copper zip hardware with engraved monogram pull",
+      "Ribbed collar, cuffs, and hem",
+      "Two zippered hand pockets with mesh lining",
+    ],
+    customizable: false,
+    isFeatured: true,
+  },
   {
     id: "train-jersey-2026",
     slug: "kovil-performance-training-jersey",
@@ -353,8 +234,8 @@ export const productsData: Product[] = [
     category: "Training",
     price: 2199,
     badge: "New Arrival",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -370,6 +251,37 @@ export const productsData: Product[] = [
     customizable: false,
     isFeatured: false,
   },
+
+  // =========================================================================
+  // 3. CLUB FANWEAR
+  // =========================================================================
+  {
+    id: "apparel-hoodie",
+    slug: "monogram-heavyweight-hoodie",
+    name: "Coromandel Monogram Heavyweight Hoodie",
+    collection: "Club Fanwear",
+    category: "Fanwear",
+    price: 3499,
+    badge: "Bestseller",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    description:
+      "Relaxed cut, premium 420gsm organic French terry cotton. Atlantic navy with chenille TF monogram patch on left chest and tonal 'ONE STATE. ONE PASSION.' embroidery across the hood.",
+    features: [
+      "420gsm 100% organic combed ring-spun cotton",
+      "Chenille felt monogram badge with metallic copper outline",
+      "Double-layered hood with copper aglet drawstrings",
+      "Kangaroo pouch pocket with reinforced bartacks",
+    ],
+    customizable: false,
+    isFeatured: true,
+  },
   {
     id: "fanwear-graphic-tee",
     slug: "one-state-one-passion-heritage-tee",
@@ -378,8 +290,8 @@ export const productsData: Product[] = [
     category: "Fanwear",
     price: 1499,
     badge: "New Arrival",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -403,8 +315,8 @@ export const productsData: Product[] = [
     category: "Fanwear",
     price: 2299,
     badge: "Bestseller",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -420,6 +332,91 @@ export const productsData: Product[] = [
     customizable: false,
     isFeatured: false,
   },
+
+  // =========================================================================
+  // 4. MATCHDAY & ACCESSORIES
+  // =========================================================================
+  {
+    id: "acc-scarf",
+    slug: "matchday-heritage-scarf",
+    name: "Official Matchday Knitted Scarf — One State",
+    collection: "Matchday & Accessories",
+    category: "Accessories",
+    price: 1199,
+    badge: "Bestseller",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["M"],
+    description:
+      "The classic supporter essential. Woven in Atlantic Navy and Porcelain with Burnished Copper fringing. Bold typography reading 'TAMILNADU FC' on one side and 'ONE STATE. ONE PASSION.' on the reverse.",
+    features: [
+      "100% premium soft-touch acrylic jacquard knit",
+      "Double-sided reversible typography",
+      "Hand-finished copper and navy fringe detailing",
+      "Dimensions: 145cm length x 18cm width",
+    ],
+    customizable: false,
+    isFeatured: true,
+  },
+  {
+    id: "acc-cap",
+    slug: "crest-structured-snapback-cap",
+    name: "Signature 3D Crest Snapback Cap",
+    collection: "Matchday & Accessories",
+    category: "Accessories",
+    price: 999,
+    badge: "Bestseller",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["M"],
+    description:
+      "Structured 6-panel profile in midnight Atlantic Navy wool blend with high-density raised rubberized club crest and copper under-visor detailing.",
+    features: [
+      "Wool-blend structured crown for lasting shape retention",
+      "Contrast copper under-visor reduces stadium glare",
+      "Adjustable snapback strap fits all head sizes",
+      "Embroidered ventilation eyelets",
+    ],
+    customizable: false,
+    isFeatured: false,
+  },
+  {
+    id: "acc-ball",
+    slug: "heritage-leather-commemorative-ball",
+    name: "1934 Commemorative Leather Football",
+    collection: "Matchday & Accessories",
+    category: "Accessories",
+    price: 2499,
+    badge: "Limited Edition",
+    status: "published",
+    isPublished: true,
+    images: {
+      front: "",
+      back: "",
+      detail: "",
+    },
+    sizes: ["M"],
+    description:
+      "A hand-stitched 18-panel genuine vintage leather football styled after the balls used in the club's 1934 founding season. Debossed with the original seal and packaged in a collector wooden display box.",
+    features: [
+      "100% full-grain tanned cowhide leather",
+      "Hand-sewn waxed cotton seams with rawhide valve lacing",
+      "Individually numbered certificate and display stand included",
+      "Debossed 1934 commemorative founding crest",
+    ],
+    customizable: false,
+    isFeatured: false,
+  },
   {
     id: "acc-flag",
     slug: "marina-wall-supporter-flag",
@@ -428,8 +425,8 @@ export const productsData: Product[] = [
     category: "Accessories",
     price: 799,
     badge: "New Arrival",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",
@@ -453,8 +450,8 @@ export const productsData: Product[] = [
     category: "Accessories",
     price: 1299,
     badge: "Bestseller",
-    status: "draft",
-    isPublished: false,
+    status: "published",
+    isPublished: true,
     images: {
       front: "",
       back: "",

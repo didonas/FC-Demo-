@@ -6,6 +6,7 @@ import { useParams, notFound } from "next/navigation";
 import { productsData } from "@/data/productsData";
 import { useCart } from "@/context/CartContext";
 import { ArrowLeft, ArrowRight, ShoppingBag, Check, ShieldCheck, Truck, RotateCcw, Sparkles, X, Info } from "lucide-react";
+import { ProductImagePlaceholder } from "@/components/store/ProductImagePlaceholder";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -38,7 +39,7 @@ export default function ProductDetailPage() {
     ...(product.images.lifestyle
       ? [{ key: "lifestyle" as const, label: "Lifestyle View", url: product.images.lifestyle }]
       : []),
-  ];
+  ].filter((img) => Boolean(img.url));
 
   const activeImage =
     galleryImages.find((img) => img.key === activeImageKey)?.url || product.images.front;
@@ -87,12 +88,20 @@ export default function ProductDetailPage() {
             <div className="lg:col-span-7 space-y-4">
               {/* Main Image Display with Optional Live Customizer Overlay */}
               <div className="rounded-3xl overflow-hidden bg-white border border-porcelain-300 shadow-md aspect-[4/5] relative flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={activeImage}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-all duration-300"
-                />
+                {activeImage ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={activeImage}
+                    alt={product.name}
+                    className={`w-full h-full ${
+                      product.imageFit === "contain"
+                        ? "object-contain p-6"
+                        : "object-cover object-center"
+                    } transition-all duration-300`}
+                  />
+                ) : (
+                  <ProductImagePlaceholder productName={product.name} size="lg" />
+                )}
 
                 {/* Live Customizer Preview Overlay (when Back view is active or user customized) */}
                 {isCustomized && (activeImageKey === "back" || activeImageKey === "front") && (
@@ -107,33 +116,37 @@ export default function ProductDetailPage() {
                 )}
 
                 {product.badge && (
-                  <span className="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-navy/90 text-porcelain text-[10px] font-heading font-black uppercase tracking-wider shadow">
+                  <span className="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-navy/90 text-porcelain text-[10px] font-heading font-black uppercase tracking-wider shadow z-10">
                     {product.badge}
                   </span>
                 )}
               </div>
 
               {/* Gallery Thumbnail Selector */}
-              <div className="grid grid-cols-4 gap-3">
-                {galleryImages.map((img) => (
-                  <button
-                    key={img.key}
-                    onClick={() => setActiveImageKey(img.key)}
-                    className={`rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white ${
-                      activeImageKey === img.key
-                        ? "border-copper shadow-md ring-2 ring-copper/30"
-                        : "border-porcelain-300 hover:border-navy/40 opacity-70 hover:opacity-100"
-                    }`}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={img.url}
-                      alt={img.label}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              {galleryImages.length > 1 && (
+                <div className="grid grid-cols-4 gap-3">
+                  {galleryImages.map((img) => (
+                    <button
+                      key={img.key}
+                      onClick={() => setActiveImageKey(img.key)}
+                      className={`rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white ${
+                        activeImageKey === img.key
+                          ? "border-copper shadow-md ring-2 ring-copper/30"
+                          : "border-porcelain-300 hover:border-navy/40 opacity-70 hover:opacity-100"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img.url}
+                        alt={img.label}
+                        className={`w-full h-full ${
+                          product.imageFit === "contain" ? "object-contain p-2" : "object-cover"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right: Product Details, Customizer & Add to Bag (5 cols) */}
@@ -393,12 +406,16 @@ export default function ProductDetailPage() {
                   className="group p-4 rounded-2xl bg-white border border-porcelain-300 hover:border-copper/40 shadow-sm transition-all flex items-center gap-4"
                 >
                   <div className="w-20 h-20 rounded-xl bg-porcelain-100 overflow-hidden shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={rel.images.front}
-                      alt={rel.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                    />
+                    {rel.images.front ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={rel.images.front}
+                        alt={rel.name}
+                        className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform"
+                      />
+                    ) : (
+                      <ProductImagePlaceholder productName={rel.name} size="sm" />
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
                     <span className="text-[10px] uppercase tracking-wider text-copper font-semibold block">

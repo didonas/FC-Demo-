@@ -5,6 +5,7 @@ import Link from "next/link";
 import { productsData } from "@/data/productsData";
 import { useCart } from "@/context/CartContext";
 import { ArrowRight, ShoppingBag, Check } from "lucide-react";
+import { ProductImagePlaceholder } from "@/components/store/ProductImagePlaceholder";
 
 export const MerchandiseSection: React.FC = () => {
   const { addItem } = useCart();
@@ -63,7 +64,7 @@ export const MerchandiseSection: React.FC = () => {
           <div
             className="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-luminosity hover:opacity-70 transition-opacity duration-700"
             style={{
-              backgroundImage: `url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1600&q=80')`,
+              backgroundImage: `url('/images/store/banner-shop-collection.jpg')`,
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent" />
@@ -103,14 +104,18 @@ export const MerchandiseSection: React.FC = () => {
               className="group rounded-2xl bg-white border border-porcelain-300 hover:border-copper/50 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden"
             >
               <Link href={`/store/${product.slug}`} className="block relative aspect-[4/5] bg-porcelain-100 overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={product.images.front}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {product.images.front ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={product.images.front}
+                    alt={product.name}
+                    className="w-full h-full object-contain p-3 transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <ProductImagePlaceholder productName={product.name} size="sm" />
+                )}
                 {product.badge && (
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-navy/90 text-porcelain text-[9px] font-heading font-bold uppercase tracking-wider shadow">
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-navy/90 text-porcelain text-[9px] font-heading font-bold uppercase tracking-wider shadow z-10">
                     {product.badge}
                   </span>
                 )}
