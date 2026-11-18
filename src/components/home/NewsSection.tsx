@@ -10,32 +10,22 @@ export const NewsSection: React.FC = () => {
   return (
     <section className="py-10 sm:py-16">
       <div className="site-container">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-10">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="h-[2px] w-6 bg-copper" />
-              <span className="text-xs font-heading font-black tracking-[0.2em] text-copper uppercase">
-                From the Heart of Tamil Nadu
-              </span>
-            </div>
-            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-navy">
-              Latest Club Stories
-            </h2>
+        {/* Main Section Header */}
+        <div className="mb-8 sm:mb-10">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="h-[2px] w-6 bg-copper" />
+            <span className="text-xs font-heading font-black tracking-[0.2em] text-copper uppercase">
+              From the Heart of Tamil Nadu
+            </span>
           </div>
-
-          <Link
-            href="/news"
-            className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy hover:text-copper transition-colors group"
-          >
-            <span>View All Stories</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-navy">
+            Latest Club Stories
+          </h2>
         </div>
 
         {/* Asymmetric Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Main Large Featured Article (7 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          {/* Main Large Featured Article (7 cols) - Completely Unchanged */}
           <div className="lg:col-span-7">
             <Link
               href={`/news/${featuredArticle.slug}`}
@@ -87,38 +77,58 @@ export const NewsSection: React.FC = () => {
             </Link>
           </div>
 
-          {/* Supporting Articles Column (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-            {supportingArticles.map((article) => (
+          {/* Supporting Articles Column (5 cols) - Refined Layout & Tight Spacing */}
+          <div className="lg:col-span-5 flex flex-col">
+            {/* Subtle Section Heading: LATEST NEWS + VIEW ALL */}
+            <div className="flex items-center justify-between pb-3 mb-4 border-b border-porcelain-200">
+              <div className="flex items-center gap-2">
+                <span className="h-[2px] w-4 bg-copper" />
+                <span className="text-xs font-heading font-black tracking-[0.2em] text-navy uppercase">
+                  Latest News
+                </span>
+              </div>
               <Link
-                key={article.id}
-                href={`/news/${article.slug}`}
-                className="group p-5 rounded-2xl bg-white border border-porcelain-300 shadow-sm hover:border-copper/40 hover:shadow-md transition-all flex gap-4 items-center"
+                href="/news"
+                className="inline-flex items-center gap-1 text-[11px] font-heading font-bold uppercase tracking-wider text-navy/70 hover:text-copper transition-colors group"
               >
-                <div className="w-24 h-24 sm:w-28 sm:h-24 rounded-xl overflow-hidden bg-navy shrink-0 relative">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${article.heroImage}')` }}
-                  />
-                </div>
+                <span>View All</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-copper" />
+              </Link>
+            </div>
 
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 text-[10px] font-semibold text-copper uppercase tracking-wider mb-1">
-                    <span>{article.category}</span>
-                    <span>•</span>
-                    <span>{article.publishDate}</span>
+            {/* Natural Content-Based Stacking with Consistent 18-20px Gap */}
+            <div className="flex flex-col gap-[18px]">
+              {supportingArticles.map((article) => (
+                <Link
+                  key={article.id}
+                  href={`/news/${article.slug}`}
+                  className="group p-5 rounded-2xl bg-white border border-porcelain-300 shadow-sm hover:border-copper/40 hover:shadow-md transition-all flex gap-4 items-center"
+                >
+                  <div className="w-24 h-24 sm:w-28 sm:h-24 rounded-xl overflow-hidden bg-navy shrink-0 relative">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                      style={{ backgroundImage: `url('${article.heroImage}')` }}
+                    />
                   </div>
 
-                  <h4 className="font-heading font-bold text-sm sm:text-base text-navy group-hover:text-copper transition-colors line-clamp-2 leading-snug">
-                    {article.title}
-                  </h4>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 text-[10px] font-semibold text-copper uppercase tracking-wider mb-1">
+                      <span>{article.category}</span>
+                      <span>•</span>
+                      <span>{article.publishDate}</span>
+                    </div>
 
-                  <span className="text-[11px] font-medium text-navy/50 mt-1 block">
-                    {article.readTime}
-                  </span>
-                </div>
-              </Link>
-            ))}
+                    <h4 className="font-heading font-bold text-sm sm:text-base text-navy group-hover:text-copper transition-colors line-clamp-2 leading-snug">
+                      {article.title}
+                    </h4>
+
+                    <span className="text-[11px] font-medium text-navy/50 mt-1 block">
+                      {article.readTime}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
