@@ -108,7 +108,7 @@ export interface StandingRow {
   form: ("W" | "D" | "L")[];
 }
 
-export type ProductCategory = "Kits" | "Training" | "Lifestyle" | "Accessories";
+export type ProductCategory = "Match Kits" | "Training" | "Fanwear" | "Accessories" | "Kits" | "Lifestyle";
 
 export interface Product {
   id: string;

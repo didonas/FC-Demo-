@@ -1,0 +1,20 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" rx="32" fill="#F4F1E9" />
+  <g transform="translate(180, 140)">
+    <!-- Left Sock -->
+    <path d="M80 60 H180 V480 L140 540 H60 L80 480 Z" fill="#F4F1E9" stroke="#DCD5C4" stroke-width="2" />
+    <!-- Navy Turnover Cuff with Copper Stripe -->
+    <rect x="75" y="40" width="110" height="60" rx="4" fill="#102738" />
+    <rect x="75" y="80" width="110" height="10" fill="#B77A59" />
+    <!-- TNFC Knit Lettering on Shin -->
+    <text x="130" y="260" text-anchor="middle" fill="#102738" font-size="28" font-weight="900" font-family="system-ui, sans-serif" letter-spacing="4">TNFC</text>
+
+    <!-- Right Sock -->
+    <path d="M260 60 H360 V480 L320 540 H240 L260 480 Z" fill="#F4F1E9" stroke="#DCD5C4" stroke-width="2" />
+    <!-- Navy Turnover Cuff -->
+    <rect x="255" y="40" width="110" height="60" rx="4" fill="#102738" />
+    <rect x="255" y="80" width="110" height="10" fill="#B77A59" />
+    <!-- TNFC Knit Lettering on Shin -->
+    <text x="310" y="260" text-anchor="middle" fill="#102738" font-size="28" font-weight="900" font-family="system-ui, sans-serif" letter-spacing="4">TNFC</text>
+  </g>
+</svg>

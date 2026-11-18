@@ -1,0 +1,28 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" rx="32" fill="#F4F1E9" />
+  <g transform="translate(150, 240)">
+    <!-- Crown Dome in Navy -->
+    <path d="M50 320 C50 140 450 140 450 320 Z" fill="#102738" stroke="#091722" stroke-width="3" />
+    <!-- Seam Lines -->
+    <path d="M250 140 V320" stroke="#1D3E56" stroke-width="2" />
+    <path d="M150 160 C180 230 200 320 200 320" stroke="#1D3E56" stroke-width="2" />
+    <path d="M350 160 C320 230 300 320 300 320" stroke="#1D3E56" stroke-width="2" />
+    <circle cx="250" cy="140" r="8" fill="#B77A59" />
+    <!-- 3D Silicone Club Crest on Crown -->
+    
+  <g transform="translate(225, 190) scale(1.4)">
+    <polygon points="25,2 26.5,5.5 30,5.7 27.5,7.8 28.3,11 25,9.2 21.7,11 22.5,7.8 20,5.7 23.5,5.5" fill="#B77A59" />
+    <path d="M25 9 L46 16 V38 C46 54 25 70 25 70 C25 70 4 54 4 38 V16 L25 9 Z" fill="#F4F1E9" stroke="#B77A59" stroke-width="1.8"/>
+    <path d="M7 19 L25 13 L43 19 V27 L25 23 L7 27 V19 Z" fill="#B77A59"/>
+    <text x="25" y="22" text-anchor="middle" fill="#102738" font-size="4.2" font-weight="900" font-family="sans-serif" letter-spacing="0.6">TAMILNADU</text>
+    <path d="M25 28 L31 41 H19 L25 28 Z" fill="#F4F1E9"/>
+    <circle cx="25" cy="27" r="1.3" fill="#B77A59"/>
+    <rect x="17" y="56" width="16" height="8" rx="2" fill="#0A1824" stroke="#B77A59" stroke-width="0.8"/>
+    <text x="25" y="62" text-anchor="middle" fill="#F4F1E9" font-size="5" font-weight="800" font-family="sans-serif">FC</text>
+  </g>
+  
+    <!-- Visor/Bill with Copper Under-Visor -->
+    <path d="M30 320 C30 320 120 440 250 440 C380 440 470 320 470 320 Z" fill="#0A1824" stroke="#B77A59" stroke-width="3" />
+    <path d="M30 320 C90 380 180 420 250 420 C320 420 410 380 470 320" stroke="#B77A59" stroke-width="4" fill="none" />
+  </g>
+</svg>

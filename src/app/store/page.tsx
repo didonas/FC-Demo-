@@ -13,7 +13,7 @@ export default function StorePage() {
   const [selectedSize, setSelectedSize] = useState<string>("All");
   const [sortBy, setSortBy] = useState<"featured" | "price-asc" | "price-desc" | "newest">("featured");
 
-  const categories = ["All", "Kits", "Training", "Lifestyle", "Accessories"];
+  const categories = ["All", "Match Kits", "Training", "Fanwear", "Accessories"];
   const sizes = ["All", "XS", "S", "M", "L", "XL", "2XL"];
 
   // Filter & Sort

@@ -1,0 +1,40 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="960" rx="32" fill="#F4F1E9" />
+  <!-- Jacket (Upper) -->
+  <g transform="translate(0, 0)">
+    <path d="M280 120 L200 150 L100 360 L160 410 L250 310 V520 H550 V310 L640 410 L700 360 L600 150 L520 120 Z" fill="#102738" />
+    <line x1="400" y1="120" x2="400" y2="520" stroke="#B77A59" stroke-width="4" />
+    <!-- Porcelain Chevron on Chest -->
+    <path d="M250 240 L400 320 L550 240 L550 270 L400 350 L250 270 Z" fill="#F4F1E9" />
+    
+  <g transform="translate(450, 180) scale(0.9)">
+    <polygon points="25,2 26.5,5.5 30,5.7 27.5,7.8 28.3,11 25,9.2 21.7,11 22.5,7.8 20,5.7 23.5,5.5" fill="#B77A59" />
+    <path d="M25 9 L46 16 V38 C46 54 25 70 25 70 C25 70 4 54 4 38 V16 L25 9 Z" fill="#F4F1E9" stroke="#B77A59" stroke-width="1.8"/>
+    <path d="M7 19 L25 13 L43 19 V27 L25 23 L7 27 V19 Z" fill="#B77A59"/>
+    <text x="25" y="22" text-anchor="middle" fill="#102738" font-size="4.2" font-weight="900" font-family="sans-serif" letter-spacing="0.6">TAMILNADU</text>
+    <path d="M25 28 L31 41 H19 L25 28 Z" fill="#F4F1E9"/>
+    <circle cx="25" cy="27" r="1.3" fill="#B77A59"/>
+    <rect x="17" y="56" width="16" height="8" rx="2" fill="#0A1824" stroke="#B77A59" stroke-width="0.8"/>
+    <text x="25" y="62" text-anchor="middle" fill="#F4F1E9" font-size="5" font-weight="800" font-family="sans-serif">FC</text>
+  </g>
+  
+  </g>
+  <!-- Track Pants (Lower) -->
+  <g transform="translate(180, 520)">
+    <path d="M60 20 H380 L350 400 L250 400 L220 160 L190 400 L90 400 Z" fill="#102738" stroke="#091722" stroke-width="2" />
+    <path d="M60 20 L90 400" stroke="#B77A59" stroke-width="3" />
+    <path d="M380 20 L350 400" stroke="#B77A59" stroke-width="3" />
+    
+  <g transform="translate(310, 80) scale(0.7)">
+    <polygon points="25,2 26.5,5.5 30,5.7 27.5,7.8 28.3,11 25,9.2 21.7,11 22.5,7.8 20,5.7 23.5,5.5" fill="#B77A59" />
+    <path d="M25 9 L46 16 V38 C46 54 25 70 25 70 C25 70 4 54 4 38 V16 L25 9 Z" fill="#F4F1E9" stroke="#B77A59" stroke-width="1.8"/>
+    <path d="M7 19 L25 13 L43 19 V27 L25 23 L7 27 V19 Z" fill="#B77A59"/>
+    <text x="25" y="22" text-anchor="middle" fill="#102738" font-size="4.2" font-weight="900" font-family="sans-serif" letter-spacing="0.6">TAMILNADU</text>
+    <path d="M25 28 L31 41 H19 L25 28 Z" fill="#F4F1E9"/>
+    <circle cx="25" cy="27" r="1.3" fill="#B77A59"/>
+    <rect x="17" y="56" width="16" height="8" rx="2" fill="#0A1824" stroke="#B77A59" stroke-width="0.8"/>
+    <text x="25" y="62" text-anchor="middle" fill="#F4F1E9" font-size="5" font-weight="800" font-family="sans-serif">FC</text>
+  </g>
+  
+  </g>
+</svg>

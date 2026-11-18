@@ -1,0 +1,34 @@
+<svg width="800" height="960" viewBox="0 0 800 960" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgAwayDet" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stopColor="#1E384D" />
+      <stop offset="100%" stopColor="#0B1A24" />
+    </radialGradient>
+    <pattern id="marineCurrentsZoom" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M0 40 Q20 25 40 40 T80 40" fill="none" stroke="#255172" stroke-width="3" opacity="0.6" />
+      <path d="M0 20 Q20 5 40 20 T80 20" fill="none" stroke="#326790" stroke-width="2" opacity="0.4" />
+    </pattern>
+  </defs>
+
+  <rect width="800" height="960" rx="32" fill="url(#bgAwayDet)" />
+  <rect x="50" y="50" width="700" height="860" rx="24" fill="#142F43" stroke="#224866" stroke-width="2" />
+  <rect x="50" y="50" width="700" height="860" rx="24" fill="url(#marineCurrentsZoom)" />
+
+  <g transform="translate(400, 420) scale(4.5)">
+    <g transform="translate(-25, -40)">
+      <polygon points="25,0 27,4.5 32,4.8 28.5,7.8 29.5,12.5 25,10 20.5,12.5 21.5,7.8 18,4.8 23,4.5" fill="#B77A59" stroke="#FFF" stroke-width="0.5"/>
+      <path d="M25 8 L46 16 V38 C46 54 25 70 25 70 C25 70 4 54 4 38 V16 L25 8 Z" fill="#F4F1E9" stroke="#B77A59" stroke-width="2.5"/>
+      <path d="M7 18 L25 12 L43 18 V26 L25 21 L7 26 V18 Z" fill="#B77A59"/>
+      <text x="25" y="20.5" text-anchor="middle" fill="#102738" font-size="4.2" font-weight="900" font-family="sans-serif">TAMILNADU</text>
+      <path d="M25 27 L32 40 H18 L25 27 Z" fill="#102738"/>
+      <circle cx="25" cy="25" r="1.5" fill="#B77A59"/>
+      <rect x="17" y="54" width="16" height="8" rx="2" fill="#0A1824" stroke="#B77A59" stroke-width="1"/>
+      <text x="25" y="60.5" text-anchor="middle" fill="#F4F1E9" font-size="5" font-weight="800" font-family="sans-serif">FC</text>
+      <text x="25" y="66" text-anchor="middle" fill="#B77A59" font-size="3" font-weight="700" font-family="sans-serif">EST. 1934</text>
+    </g>
+  </g>
+
+  <rect x="80" y="810" width="640" height="70" rx="16" fill="#102738" stroke="#B77A59" stroke-width="1" />
+  <text x="120" y="842" fill="#F4F1E9" font-size="16" font-weight="800" font-family="sans-serif">The Atlantic — Ocean Currents Micro-Weave</text>
+  <text x="120" y="862" fill="#B77A59" font-size="12" font-weight="600" font-family="sans-serif">Silicone White Crest with Burnished Copper Border Trims</text>
+</svg>
