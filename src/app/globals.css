@@ -75,14 +75,21 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 24px 24px;
 }
 
-/* Smooth container max-width */
+/* Smooth container max-width with responsive 16-20px mobile margins */
 .site-container {
   width: 100%;
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 380px) {
+  .site-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
 }
 
 @media (min-width: 768px) {

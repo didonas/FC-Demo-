@@ -34,7 +34,7 @@ export default function HomePage() {
       <StadiumSection />
 
       {/* 8. Final Promotional Call to Action Banner */}
-      <section className="py-12 sm:py-16">
+      <section className="py-8 sm:py-16">
         <div className="site-container">
           <div className="rounded-3xl bg-gradient-to-r from-navy via-navy to-navy-900 p-8 sm:p-12 text-porcelain flex flex-col md:flex-row items-center justify-between gap-6 border border-copper/30 shadow-lg">
             <div className="space-y-2 text-center md:text-left">

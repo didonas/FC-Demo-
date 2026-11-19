@@ -55,35 +55,35 @@ export const MatchdaySection: React.FC = () => {
   };
 
   return (
-    <section className="py-8 sm:py-12">
+    <section className="pt-2 pb-6 sm:py-12">
       <div className="site-container">
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="h-[2px] w-6 bg-copper" />
-              <span className="text-xs font-heading font-black tracking-[0.2em] text-copper uppercase">
+        {/* Section Header with Refined Mobile Spacing & Breathing Room */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-4 sm:mb-8">
+          <div className="space-y-0.5 sm:space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="h-[2px] w-5 sm:w-6 bg-copper" />
+              <span className="text-[10px] sm:text-xs font-heading font-black tracking-[0.2em] text-copper uppercase">
                 Match Centre
               </span>
             </div>
-            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-navy">
+            <h2 className="font-heading font-extrabold text-xl sm:text-3xl text-navy">
               Upcoming Matchday
             </h2>
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
-            {/* Mobile Rail Scroll Controls (Real Madrid UX) */}
-            <div className="flex lg:hidden items-center gap-1">
+          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto pt-1 sm:pt-0">
+            {/* Mobile Rail Scroll Controls */}
+            <div className="flex lg:hidden items-center gap-1.5">
               <button
                 onClick={() => scrollRail("left")}
-                className="p-1.5 rounded-full border border-porcelain-300 hover:bg-porcelain-200 text-navy transition-colors active:scale-95 cursor-pointer"
+                className="w-8 h-8 rounded-full border border-porcelain-300 hover:bg-porcelain-200 text-navy transition-colors active:scale-95 flex items-center justify-center cursor-pointer"
                 aria-label="Previous fixture"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={() => scrollRail("right")}
-                className="p-1.5 rounded-full border border-porcelain-300 hover:bg-porcelain-200 text-navy transition-colors active:scale-95 cursor-pointer"
+                className="w-8 h-8 rounded-full border border-porcelain-300 hover:bg-porcelain-200 text-navy transition-colors active:scale-95 flex items-center justify-center cursor-pointer"
                 aria-label="Next fixture"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -92,10 +92,10 @@ export const MatchdaySection: React.FC = () => {
 
             <Link
               href="/matches"
-              className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy hover:text-copper transition-colors group"
+              className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider text-navy hover:text-copper transition-colors group shrink-0"
             >
               <span>Full Fixtures & Standings</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-copper" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-copper" />
             </Link>
           </div>
         </div>
@@ -103,12 +103,12 @@ export const MatchdaySection: React.FC = () => {
         {/* 1. MOBILE ONLY (< lg): Real Madrid-Inspired Horizontal Fixture Rail */}
         <div
           ref={mobileRailRef}
-          className="flex lg:hidden gap-3.5 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+          className="flex lg:hidden gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
         >
           {upcomingMatches.map((match, idx) => (
             <div
               key={match.id}
-              className="w-[84vw] max-w-[340px] shrink-0 snap-start rounded-2xl bg-white border border-porcelain-300 shadow-sm p-4 flex flex-col justify-between space-y-4"
+              className="w-[82vw] max-w-[325px] shrink-0 snap-start rounded-2xl bg-white border border-porcelain-300 shadow-sm p-4 flex flex-col justify-between space-y-3"
             >
               {/* Card Top: Competition + Round / Date */}
               <div className="flex items-center justify-between pb-3 border-b border-porcelain-200 text-xs">
@@ -208,7 +208,7 @@ export const MatchdaySection: React.FC = () => {
               {match.ticketsAvailable ? (
                 <Link
                   href={`/tickets/${match.id}`}
-                  className="w-full py-3 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all"
+                  className="w-full h-11 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all"
                 >
                   <Ticket className="w-4 h-4 text-copper" />
                   <span>Choose Seats (From ₹{match.ticketStartingPrice})</span>

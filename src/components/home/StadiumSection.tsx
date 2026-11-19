@@ -4,7 +4,7 @@ import { ArrowRight, MapPin, Users, Sparkles, Compass } from "lucide-react";
 
 export const StadiumSection: React.FC = () => {
   return (
-    <section className="py-12 sm:py-20">
+    <section className="py-8 sm:py-20">
       <div className="site-container">
         <div className="relative rounded-3xl sm:rounded-[36px] overflow-hidden bg-navy text-porcelain p-8 sm:p-14 lg:p-20 border border-porcelain-300 shadow-xl">
           {/* Panoramic background */}

@@ -21,7 +21,7 @@ export const NewsSection: React.FC = () => {
   };
 
   return (
-    <section className="py-8 sm:py-16">
+    <section className="py-6 sm:py-16">
       <div className="site-container">
         {/* Main Section Header */}
         <div className="mb-6 sm:mb-10">

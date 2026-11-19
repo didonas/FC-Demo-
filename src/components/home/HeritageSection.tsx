@@ -12,7 +12,7 @@ export const HeritageSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 bg-navy text-porcelain relative overflow-hidden">
+    <section className="py-10 sm:py-24 bg-navy text-porcelain relative overflow-hidden">
       {/* Cinematic stadium background overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-25 mix-blend-luminosity"

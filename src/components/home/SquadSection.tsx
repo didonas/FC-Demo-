@@ -20,7 +20,7 @@ export const SquadSection: React.FC = () => {
   };
 
   return (
-    <section className="py-8 sm:py-16 bg-porcelain-100/60 border-y border-porcelain-200">
+    <section className="py-6 sm:py-16 bg-porcelain-100/60 border-y border-porcelain-200">
       <div className="site-container">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-10">
