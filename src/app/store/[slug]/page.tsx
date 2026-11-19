@@ -5,17 +5,7 @@ import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { productsData } from "@/data/productsData";
 import { useCart } from "@/context/CartContext";
-import {
-  ArrowLeft,
-  ShoppingBag,
-  Check,
-  ShieldCheck,
-  Truck,
-  RotateCcw,
-  Sparkles,
-  X,
-  Info,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, ShoppingBag, Check, ShieldCheck, Truck, RotateCcw, Sparkles, X, Info } from "lucide-react";
 import { ProductImagePlaceholder } from "@/components/store/ProductImagePlaceholder";
 
 export default function ProductDetailPage() {
@@ -33,7 +23,6 @@ export default function ProductDetailPage() {
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0] || "M");
   const [quantity, setQuantity] = useState<number>(1);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState<boolean>(false);
-  const [addedAnimation, setAddedAnimation] = useState<boolean>(false);
 
   // Customization state (Name & Number printing)
   const [isCustomized, setIsCustomized] = useState(false);
@@ -67,8 +56,6 @@ export default function ProductDetailPage() {
         ? { name: customName.toUpperCase(), number: customNumber }
         : undefined,
     });
-    setAddedAnimation(true);
-    setTimeout(() => setAddedAnimation(false), 2000);
   };
 
   const relatedProducts = productsData
@@ -82,9 +69,9 @@ export default function ProductDetailPage() {
     .slice(0, 3);
 
   return (
-    <div className="bg-[#F4F1E9] min-h-screen pb-24 md:pb-0">
+    <div className="bg-[#F4F1E9] min-h-screen">
       {/* Top Breadcrumb */}
-      <div className="site-container py-3.5 border-b border-porcelain-300">
+      <div className="site-container py-4 border-b border-porcelain-300">
         <Link
           href="/store"
           className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy/70 hover:text-copper transition-colors"
@@ -94,12 +81,12 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Main Product Showcase Section */}
-      <section className="py-6 sm:py-16">
+      <section className="py-10 sm:py-16">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
             {/* Left: Multi-Angle Image Gallery (7 cols) */}
-            <div className="lg:col-span-7 space-y-3.5 sm:space-y-4">
-              {/* Main Image Display with Live Customizer Overlay */}
+            <div className="lg:col-span-7 space-y-4">
+              {/* Main Image Display with Optional Live Customizer Overlay */}
               <div className="rounded-3xl overflow-hidden bg-white border border-porcelain-300 shadow-md aspect-[4/5] relative flex items-center justify-center">
                 {activeImage ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
@@ -108,7 +95,7 @@ export default function ProductDetailPage() {
                     alt={product.name}
                     className={`w-full h-full ${
                       product.imageFit === "contain"
-                        ? "object-contain p-4 sm:p-6"
+                        ? "object-contain p-6"
                         : "object-cover object-center"
                     } transition-all duration-300`}
                   />
@@ -116,45 +103,44 @@ export default function ProductDetailPage() {
                   <ProductImagePlaceholder productName={product.name} size="lg" />
                 )}
 
-                {/* Live Customizer Preview Overlay */}
+                {/* Live Customizer Preview Overlay (when Back view is active or user customized) */}
                 {isCustomized && (activeImageKey === "back" || activeImageKey === "front") && (
                   <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-navy select-none pt-8">
-                    <span className="font-heading font-black text-5xl sm:text-7xl lg:text-8xl tracking-widest text-navy/90 drop-shadow-md">
+                    <span className="font-heading font-black text-6xl sm:text-7xl lg:text-8xl tracking-widest text-navy/90 drop-shadow-md">
                       {customNumber || "10"}
                     </span>
-                    <span className="font-heading font-extrabold text-base sm:text-2xl tracking-[0.25em] text-navy/90 uppercase drop-shadow mt-1">
+                    <span className="font-heading font-extrabold text-xl sm:text-2xl tracking-[0.25em] text-navy/90 uppercase drop-shadow mt-1">
                       {customName || "PLAYER"}
                     </span>
                   </div>
                 )}
 
                 {product.badge && (
-                  <span className="absolute top-4 left-4 sm:top-5 sm:left-5 px-3 py-1 rounded-full bg-navy/90 text-porcelain text-[9px] sm:text-[10px] font-heading font-black uppercase tracking-wider shadow z-10">
+                  <span className="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-navy/90 text-porcelain text-[10px] font-heading font-black uppercase tracking-wider shadow z-10">
                     {product.badge}
                   </span>
                 )}
               </div>
 
-              {/* Gallery Thumbnail Selector with touch-friendly buttons */}
+              {/* Gallery Thumbnail Selector */}
               {galleryImages.length > 1 && (
-                <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                <div className="grid grid-cols-4 gap-3">
                   {galleryImages.map((img) => (
                     <button
                       key={img.key}
                       onClick={() => setActiveImageKey(img.key)}
-                      className={`rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white active:scale-95 ${
+                      className={`rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white ${
                         activeImageKey === img.key
                           ? "border-copper shadow-md ring-2 ring-copper/30"
                           : "border-porcelain-300 hover:border-navy/40 opacity-70 hover:opacity-100"
                       }`}
-                      aria-label={img.label}
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={img.url}
                         alt={img.label}
                         className={`w-full h-full ${
-                          product.imageFit === "contain" ? "object-contain p-1" : "object-cover"
+                          product.imageFit === "contain" ? "object-contain p-2" : "object-cover"
                         }`}
                       />
                     </button>
@@ -163,120 +149,120 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Right: Product Buy Panel & Specs (5 cols) */}
+            {/* Right: Product Details, Customizer & Add to Bag (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              {/* Product Header */}
-              <div className="space-y-2 border-b border-porcelain-200 pb-5">
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-full bg-navy text-porcelain text-[9px] font-heading font-bold uppercase tracking-wider">
-                    {product.category}
-                  </span>
-                  <span className="text-xs font-semibold text-copper">
-                    {product.collection}
-                  </span>
+              {/* Category & Collection */}
+              <div>
+                <div className="flex items-center gap-2 text-xs font-heading font-black tracking-widest text-copper uppercase mb-2">
+                  <span>{product.collection}</span>
+                  <span>•</span>
+                  <span>{product.category}</span>
                 </div>
 
-                <h1 className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-navy tracking-tight leading-tight">
+                <h1 className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-navy leading-tight">
                   {product.name}
                 </h1>
 
-                {/* Pricing display */}
-                <div className="flex items-baseline gap-3 pt-1">
-                  <span className="font-heading font-black text-2xl sm:text-3xl text-navy">
+                {/* Price */}
+                <div className="flex items-baseline gap-3 mt-4">
+                  <span className="font-heading font-black text-3xl text-navy">
                     ₹{unitPrice.toLocaleString("en-IN")}
                   </span>
-                  {product.originalPrice && (
-                    <span className="text-sm sm:text-base text-navy/40 line-through">
+                  {product.originalPrice && !isCustomized && (
+                    <span className="text-sm text-navy/40 line-through">
                       ₹{product.originalPrice.toLocaleString("en-IN")}
                     </span>
                   )}
-                  {isCustomized && (
-                    <span className="text-xs font-semibold text-copper bg-copper/15 px-2 py-0.5 rounded-full">
-                      +₹{customizationFee} Name & Number
-                    </span>
-                  )}
+                  <span className="text-xs text-green-700 font-semibold bg-green-100 px-2.5 py-0.5 rounded-full">
+                    Official Authenticated Matchwear
+                  </span>
                 </div>
               </div>
 
-              {/* Size Selector with clear touch targets */}
-              <div className="space-y-3">
+              {/* Description */}
+              <p className="text-xs sm:text-sm text-navy/75 leading-relaxed border-t border-porcelain-200 pt-4">
+                {product.description}
+              </p>
+
+              {/* Size Selector */}
+              <div className="space-y-2 pt-2 border-t border-porcelain-200">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-heading font-bold uppercase tracking-wider text-navy">
+                  <span className="font-heading font-bold text-navy uppercase tracking-wider">
                     Select Size: <strong className="text-copper">{selectedSize}</strong>
                   </span>
                   <button
                     onClick={() => setIsSizeGuideOpen(true)}
-                    className="text-copper hover:underline font-semibold flex items-center gap-1"
+                    className="text-copper font-medium hover:underline flex items-center gap-1"
                   >
                     <Info className="w-3.5 h-3.5" /> Size Guide
                   </button>
                 </div>
 
-                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-                  {product.sizes.map((size) => (
+                <div className="grid grid-cols-6 gap-2">
+                  {product.sizes.map((sz) => (
                     <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`h-11 rounded-xl font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center active:scale-95 ${
-                        selectedSize === size
-                          ? "bg-navy text-porcelain shadow-md ring-2 ring-copper"
-                          : "bg-white border border-porcelain-300 text-navy hover:border-copper"
+                      key={sz}
+                      onClick={() => setSelectedSize(sz)}
+                      className={`h-11 rounded-xl text-xs font-heading font-bold transition-all ${
+                        selectedSize === sz
+                          ? "bg-navy text-porcelain ring-2 ring-copper shadow-sm"
+                          : "bg-white hover:bg-porcelain-200 text-navy border border-porcelain-300"
                       }`}
                     >
-                      {size}
+                      {sz}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Official Customizer Toggle (Jerseys & Kits only) */}
-              {(product.category === "Match Kits" || product.category === "Kits") && (
-                <div className="p-4 rounded-2xl bg-white border border-porcelain-300 shadow-sm space-y-3">
+              {/* Custom Name & Number Printing (For Kits) */}
+              {product.customizable && (
+                <div className="p-4 rounded-2xl bg-white border border-porcelain-300 space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-copper" />
-                      <span className="font-heading font-bold text-xs uppercase tracking-wider text-navy">
-                        Official Player Print
-                      </span>
-                    </div>
-                    <button
-                      onClick={() => setIsCustomized(!isCustomized)}
-                      className={`px-3 py-1 rounded-full text-xs font-heading font-bold uppercase transition-all ${
-                        isCustomized
-                          ? "bg-copper text-navy shadow-sm"
-                          : "bg-porcelain-200 text-navy/70 hover:bg-porcelain-300"
-                      }`}
-                    >
-                      {isCustomized ? "Applied (+₹499)" : "Add (+₹499)"}
-                    </button>
+                    <label className="flex items-center gap-2 cursor-pointer text-xs font-heading font-bold text-navy">
+                      <input
+                        type="checkbox"
+                        checked={isCustomized}
+                        onChange={(e) => {
+                          setIsCustomized(e.target.checked);
+                          if (e.target.checked) setActiveImageKey("back");
+                        }}
+                        className="w-4 h-4 rounded text-copper focus:ring-copper"
+                      />
+                      <span>Add Official Name & Number (+₹{customizationFee})</span>
+                    </label>
+                    <span className="text-[10px] font-bold text-copper uppercase">
+                      Player Specification
+                    </span>
                   </div>
 
                   {isCustomized && (
-                    <div className="grid grid-cols-2 gap-3 pt-2 border-t border-porcelain-200 animate-fadeIn">
+                    <div className="grid grid-cols-2 gap-3 pt-2 border-t border-porcelain-200">
                       <div>
-                        <label className="text-[10px] font-heading font-bold uppercase text-navy/60 block mb-1">
-                          Name (Max 12)
+                        <label className="text-[10px] font-bold text-navy/60 uppercase block mb-1">
+                          Shirt Name
                         </label>
                         <input
                           type="text"
                           maxLength={12}
                           value={customName}
                           onChange={(e) => setCustomName(e.target.value.toUpperCase())}
-                          className="w-full px-3 py-2 rounded-xl bg-porcelain-50 border border-porcelain-300 text-navy font-heading font-bold text-xs uppercase tracking-widest focus:outline-none focus:border-copper"
-                          placeholder="VARADHAN"
+                          placeholder="e.g. VARADHAN"
+                          className="w-full px-3 py-2 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy uppercase focus:outline-none focus:border-copper"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-heading font-bold uppercase text-navy/60 block mb-1">
-                          Number (1-99)
+                        <label className="text-[10px] font-bold text-navy/60 uppercase block mb-1">
+                          Shirt Number
                         </label>
                         <input
-                          type="text"
-                          maxLength={2}
+                          type="number"
+                          min={1}
+                          max={99}
                           value={customNumber}
-                          onChange={(e) => setCustomNumber(e.target.value.replace(/\D/g, ""))}
-                          className="w-full px-3 py-2 rounded-xl bg-porcelain-50 border border-porcelain-300 text-navy font-heading font-black text-xs text-center focus:outline-none focus:border-copper"
+                          onChange={(e) => setCustomNumber(e.target.value)}
                           placeholder="10"
+                          className="w-full px-3 py-2 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy focus:outline-none focus:border-copper"
                         />
                       </div>
                     </div>
@@ -284,164 +270,169 @@ export default function ProductDetailPage() {
                 </div>
               )}
 
-              {/* Quantity & Desktop Add to Cart Button */}
-              <div className="space-y-4 pt-2">
-                <div className="flex items-center gap-4">
+              {/* Quantity & Add to Bag CTA */}
+              <div className="pt-2 space-y-3">
+                <div className="flex gap-3">
                   {/* Quantity Stepper */}
-                  <div className="flex items-center border border-porcelain-300 rounded-xl bg-white overflow-hidden shrink-0">
+                  <div className="flex items-center border border-porcelain-300 rounded-full bg-white px-3 py-2">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="w-10 h-11 flex items-center justify-center text-navy font-bold hover:bg-porcelain-100 active:scale-95"
-                      aria-label="Decrease quantity"
+                      className="text-navy hover:text-copper px-2 text-sm font-bold"
                     >
                       -
                     </button>
-                    <span className="w-10 text-center font-heading font-bold text-xs text-navy">
+                    <span className="px-3 text-xs font-heading font-bold text-navy">
                       {quantity}
                     </span>
                     <button
-                      onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-                      className="w-10 h-11 flex items-center justify-center text-navy font-bold hover:bg-porcelain-100 active:scale-95"
-                      aria-label="Increase quantity"
+                      onClick={() => setQuantity((q) => q + 1)}
+                      className="text-navy hover:text-copper px-2 text-sm font-bold"
                     >
                       +
                     </button>
                   </div>
 
-                  {/* Desktop Primary Add to Bag Action */}
+                  {/* Add to Bag Button */}
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 py-3.5 px-6 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg active:scale-98"
+                    className="flex-1 py-4 px-6 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group cursor-pointer"
                   >
-                    {addedAnimation ? (
-                      <>
-                        <Check className="w-4 h-4 text-copper" />
-                        <span>Added to Bag!</span>
-                      </>
-                    ) : (
-                      <>
-                        <ShoppingBag className="w-4 h-4 text-copper" />
-                        <span>Add to Bag • ₹{(unitPrice * quantity).toLocaleString("en-IN")}</span>
-                      </>
-                    )}
+                    <ShoppingBag className="w-4 h-4 text-copper" />
+                    <span>Add to Bag • ₹{(unitPrice * quantity).toLocaleString("en-IN")}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
 
-              {/* Product Specifications & Editorial Description */}
-              <div className="pt-4 border-t border-porcelain-200 space-y-3">
-                <h3 className="font-heading font-bold text-xs uppercase tracking-widest text-navy">
-                  Description & Craftsmanship
-                </h3>
-                <p className="text-xs sm:text-sm text-navy/75 leading-relaxed">
-                  {product.description}
-                </p>
-                <div className="grid grid-cols-2 gap-2 pt-2 text-[11px] text-navy/70">
-                  <div className="p-2.5 rounded-xl bg-white border border-porcelain-200">
-                    <span className="text-navy/50 block text-[9px] uppercase font-bold">Fabric</span>
-                    <strong className="text-navy font-semibold">{product.details?.material || "100% Recycled Poly-Mesh"}</strong>
-                  </div>
-                  <div className="p-2.5 rounded-xl bg-white border border-porcelain-200">
-                    <span className="text-navy/50 block text-[9px] uppercase font-bold">Origin</span>
-                    <strong className="text-navy font-semibold">{product.details?.madeIn || "Tamil Nadu, India"}</strong>
-                  </div>
+              {/* Quality & Delivery Assurance Pills */}
+              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-porcelain-200 text-center text-[10px] text-navy/70">
+                <div className="p-3 rounded-2xl bg-white border border-porcelain-200">
+                  <Truck className="w-4 h-4 text-copper mx-auto mb-1" />
+                  <span>Free Shipping on ₹2,500+</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-white border border-porcelain-200">
+                  <ShieldCheck className="w-4 h-4 text-copper mx-auto mb-1" />
+                  <span>Official Authenticated</span>
+                </div>
+                <div className="p-3 rounded-2xl bg-white border border-porcelain-200">
+                  <RotateCcw className="w-4 h-4 text-copper mx-auto mb-1" />
+                  <span>14-Day Free Exchange</span>
                 </div>
               </div>
 
-              {/* Value Props Strip */}
-              <div className="grid grid-cols-3 gap-2 pt-2 text-center text-[10px] text-navy/70 border-t border-porcelain-200">
-                <div className="flex flex-col items-center p-2 rounded-xl bg-porcelain-50">
-                  <ShieldCheck className="w-4 h-4 text-copper mb-1" />
-                  <span>100% Official Club Gear</span>
-                </div>
-                <div className="flex flex-col items-center p-2 rounded-xl bg-porcelain-50">
-                  <Truck className="w-4 h-4 text-copper mb-1" />
-                  <span>Free Shipping over ₹2,500</span>
-                </div>
-                <div className="flex flex-col items-center p-2 rounded-xl bg-porcelain-50">
-                  <RotateCcw className="w-4 h-4 text-copper mb-1" />
-                  <span>14-Day Free Exchange</span>
-                </div>
+              {/* Product Specifications List */}
+              <div className="p-5 rounded-2xl bg-white border border-porcelain-300 space-y-2">
+                <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-navy">
+                  Technical Specifications & Fabric
+                </h4>
+                <ul className="space-y-1.5 text-xs text-navy/75 pt-1">
+                  {product.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-2">
+                      <Check className="w-3.5 h-3.5 text-copper shrink-0 mt-0.5" />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* MOBILE STICKY ADD-TO-BAG BOTTOM BAR (< 768px) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-porcelain-300 p-3 shadow-2xl safe-area-pb">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex flex-col min-w-0">
-            <span className="text-[10px] text-navy/60 font-semibold truncate">
-              {product.name} ({selectedSize})
-            </span>
-            <span className="font-heading font-black text-lg text-navy leading-none mt-0.5">
-              ₹{(unitPrice * quantity).toLocaleString("en-IN")}
-            </span>
-          </div>
-
-          <button
-            onClick={handleAddToCart}
-            className="flex-1 max-w-[200px] py-3 px-5 rounded-full bg-navy active:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
-          >
-            {addedAnimation ? (
-              <>
-                <Check className="w-4 h-4 text-copper" />
-                <span>Added!</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="w-4 h-4 text-copper" />
-                <span>Add to Bag</span>
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-
       {/* Size Guide Modal */}
       {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/80 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-sm p-4">
+          <div className="w-full max-w-lg bg-porcelain rounded-3xl p-6 sm:p-8 shadow-2xl border border-porcelain-300 space-y-4">
             <div className="flex items-center justify-between border-b border-porcelain-200 pb-3">
-              <h3 className="font-heading font-bold text-base text-navy">
-                Official Kit Size Guide (Chest Inches)
+              <h3 className="font-heading font-extrabold text-lg text-navy">
+                Official Kit Size Guide
               </h3>
               <button
                 onClick={() => setIsSizeGuideOpen(false)}
-                className="p-1 rounded-full hover:bg-porcelain-100 text-navy"
-                aria-label="Close size guide"
+                className="p-1 rounded-full hover:bg-porcelain-200 text-navy/60 hover:text-navy"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="overflow-x-auto text-xs">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-porcelain-50 border-b border-porcelain-200 text-navy/60 font-bold">
-                    <th className="p-2">Size</th>
-                    <th className="p-2">Chest (Inches)</th>
-                    <th className="p-2">Length (Inches)</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-porcelain-200">
-                  <tr><td className="p-2 font-bold">XS</td><td className="p-2">34 - 36</td><td className="p-2">26.5</td></tr>
-                  <tr><td className="p-2 font-bold">S</td><td className="p-2">36 - 38</td><td className="p-2">27.5</td></tr>
-                  <tr><td className="p-2 font-bold">M</td><td className="p-2">38 - 40</td><td className="p-2">28.5</td></tr>
-                  <tr><td className="p-2 font-bold">L</td><td className="p-2">40 - 42</td><td className="p-2">29.5</td></tr>
-                  <tr><td className="p-2 font-bold">XL</td><td className="p-2">42 - 44</td><td className="p-2">30.5</td></tr>
-                  <tr><td className="p-2 font-bold">2XL</td><td className="p-2">44 - 46</td><td className="p-2">31.5</td></tr>
-                </tbody>
-              </table>
+
+            <p className="text-xs text-navy/70">
+              Measurements in centimeters. For an athletic slim fit, select your true size. For a relaxed supporter fit, consider ordering one size up.
+            </p>
+
+            <table className="w-full text-xs text-left border-collapse">
+              <thead>
+                <tr className="bg-porcelain-200 text-navy font-heading font-bold">
+                  <th className="p-2.5">Size</th>
+                  <th className="p-2.5">Chest (cm)</th>
+                  <th className="p-2.5">Waist (cm)</th>
+                  <th className="p-2.5">Length (cm)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-porcelain-200 font-medium">
+                <tr><td className="p-2.5 font-bold">XS</td><td className="p-2.5">86 - 91</td><td className="p-2.5">71 - 76</td><td className="p-2.5">69</td></tr>
+                <tr><td className="p-2.5 font-bold">S</td><td className="p-2.5">91 - 96</td><td className="p-2.5">76 - 81</td><td className="p-2.5">71</td></tr>
+                <tr><td className="p-2.5 font-bold">M</td><td className="p-2.5">96 - 102</td><td className="p-2.5">81 - 86</td><td className="p-2.5">73</td></tr>
+                <tr><td className="p-2.5 font-bold">L</td><td className="p-2.5">102 - 108</td><td className="p-2.5">86 - 92</td><td className="p-2.5">75</td></tr>
+                <tr><td className="p-2.5 font-bold">XL</td><td className="p-2.5">108 - 116</td><td className="p-2.5">92 - 100</td><td className="p-2.5">77</td></tr>
+                <tr><td className="p-2.5 font-bold">2XL</td><td className="p-2.5">116 - 124</td><td className="p-2.5">100 - 108</td><td className="p-2.5">79</td></tr>
+              </tbody>
+            </table>
+
+            <div className="pt-2 text-right">
+              <button
+                onClick={() => setIsSizeGuideOpen(false)}
+                className="px-5 py-2 rounded-full bg-navy text-porcelain text-xs font-semibold"
+              >
+                Close Guide
+              </button>
             </div>
-            <button
-              onClick={() => setIsSizeGuideOpen(false)}
-              className="w-full py-2.5 rounded-full bg-navy text-porcelain text-xs font-heading font-bold uppercase"
-            >
-              Close Guide
-            </button>
           </div>
         </div>
+      )}
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <section className="py-12 sm:py-16 border-t border-porcelain-200">
+          <div className="site-container">
+            <h3 className="font-heading font-extrabold text-xl text-navy mb-6">
+              Complete the Matchday Look
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {relatedProducts.map((rel) => (
+                <Link
+                  key={rel.id}
+                  href={`/store/${rel.slug}`}
+                  className="group p-4 rounded-2xl bg-white border border-porcelain-300 hover:border-copper/40 shadow-sm transition-all flex items-center gap-4"
+                >
+                  <div className="w-20 h-20 rounded-xl bg-porcelain-100 overflow-hidden shrink-0">
+                    {rel.images.front ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img
+                        src={rel.images.front}
+                        alt={rel.name}
+                        className="w-full h-full object-contain p-1 group-hover:scale-105 transition-transform"
+                      />
+                    ) : (
+                      <ProductImagePlaceholder productName={rel.name} size="sm" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] uppercase tracking-wider text-copper font-semibold block">
+                      {rel.category}
+                    </span>
+                    <h4 className="font-heading font-bold text-sm text-navy group-hover:text-copper transition-colors truncate mt-0.5">
+                      {rel.name}
+                    </h4>
+                    <span className="font-heading font-bold text-xs text-navy block mt-1">
+                      ₹{rel.price.toLocaleString("en-IN")}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
     </div>
   );

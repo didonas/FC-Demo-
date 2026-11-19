@@ -107,7 +107,7 @@ export default function CheckoutPage() {
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                     />
                   </div>
                   <div>
@@ -119,7 +119,7 @@ export default function CheckoutPage() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                     />
                   </div>
                   <div>
@@ -131,7 +131,7 @@ export default function CheckoutPage() {
                       required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                     />
                   </div>
                 </div>
@@ -152,10 +152,10 @@ export default function CheckoutPage() {
                       required
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
-                      className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                      className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                     />
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3">
                     <div>
                       <label className="text-[10px] font-bold text-navy/60 uppercase block mb-1">
                         City *
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
                         required
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                        className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                       />
                     </div>
                     <div>
@@ -177,7 +177,7 @@ export default function CheckoutPage() {
                         required
                         value={state}
                         onChange={(e) => setState(e.target.value)}
-                        className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                        className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                       />
                     </div>
                     <div>
@@ -189,7 +189,7 @@ export default function CheckoutPage() {
                         required
                         value={pincode}
                         onChange={(e) => setPincode(e.target.value)}
-                        className="w-full px-4 py-3 sm:py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                        className="w-full px-4 py-2.5 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
                       />
                     </div>
                   </div>

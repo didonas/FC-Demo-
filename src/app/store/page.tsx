@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { productsData } from "@/data/productsData";
-import { Product } from "@/types";
+import { ProductCategory, Product } from "@/types";
 import { useCart } from "@/context/CartContext";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag, Filter, ArrowUpDown, ArrowRight, Check } from "lucide-react";
 import { ProductImagePlaceholder } from "@/components/store/ProductImagePlaceholder";
 
 // Category Collection Banners mapped directly to the extracted high-res PDF images
@@ -103,7 +103,7 @@ export default function StorePage() {
   return (
     <div className="bg-[#F4F1E9] min-h-screen">
       {/* Hero Campaign Header with Dynamic Category Collection Banner */}
-      <section className="relative py-12 sm:py-24 bg-navy text-porcelain overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-navy text-porcelain overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-45 mix-blend-luminosity transition-all duration-700"
           style={{
@@ -112,29 +112,29 @@ export default function StorePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/85 to-navy/60" />
 
-        <div className="site-container relative z-10 text-center max-w-3xl mx-auto px-4">
-          <span className="text-[10px] sm:text-xs font-heading font-black tracking-[0.24em] text-copper uppercase block mb-2 sm:mb-3">
+        <div className="site-container relative z-10 text-center max-w-3xl mx-auto">
+          <span className="text-xs font-heading font-black tracking-[0.24em] text-copper uppercase block mb-3">
             {currentBanner.badge}
           </span>
-          <h1 className="font-heading font-black text-3xl sm:text-6xl text-porcelain tracking-tight leading-tight">
+          <h1 className="font-heading font-black text-4xl sm:text-6xl text-porcelain tracking-tight">
             {currentBanner.title}
           </h1>
-          <p className="text-xs sm:text-base text-porcelain/80 mt-2.5 sm:mt-4 leading-relaxed line-clamp-3 sm:line-clamp-none max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-porcelain/80 mt-4 leading-relaxed">
             {currentBanner.description}
           </p>
         </div>
       </section>
 
       {/* Filter & Sorting Controls Bar */}
-      <section className="sticky top-[64px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3 shadow-sm">
-        <div className="site-container flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
-          {/* Horizontally scrollable Category Tabs on mobile */}
-          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3.5">
+        <div className="site-container flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Category Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-heading font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 active:scale-95 ${
+                className={`px-4 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all ${
                   selectedCategory === cat
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80"
@@ -146,14 +146,14 @@ export default function StorePage() {
           </div>
 
           {/* Size Filter & Sort Controls */}
-          <div className="flex items-center justify-between md:justify-end gap-3 text-xs">
+          <div className="flex items-center gap-4 text-xs">
             {/* Size Selector */}
-            <div className="flex items-center gap-1.5 flex-1 md:flex-none">
-              <span className="text-navy/60 font-semibold text-[11px] shrink-0">Size:</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-navy/60 font-semibold hidden sm:inline">Size:</span>
               <select
                 value={selectedSize}
                 onChange={(e) => setSelectedSize(e.target.value)}
-                className="w-full md:w-auto px-2.5 py-1.5 rounded-lg border border-porcelain-300 bg-white text-navy font-semibold text-xs focus:outline-none focus:border-copper"
+                className="px-3 py-1.5 rounded-lg border border-porcelain-300 bg-white text-navy font-semibold focus:outline-none focus:border-copper"
               >
                 {sizes.map((s) => (
                   <option key={s} value={s}>
@@ -164,12 +164,12 @@ export default function StorePage() {
             </div>
 
             {/* Sorting Dropdown */}
-            <div className="flex items-center gap-1.5 flex-1 md:flex-none">
-              <span className="text-navy/60 font-semibold text-[11px] shrink-0">Sort:</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-navy/60 font-semibold hidden sm:inline">Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as any)}
-                className="w-full md:w-auto px-2.5 py-1.5 rounded-lg border border-porcelain-300 bg-white text-navy font-semibold text-xs focus:outline-none focus:border-copper"
+                className="px-3 py-1.5 rounded-lg border border-porcelain-300 bg-white text-navy font-semibold focus:outline-none focus:border-copper"
               >
                 <option value="featured">Featured</option>
                 <option value="newest">New Arrivals</option>
@@ -181,23 +181,23 @@ export default function StorePage() {
         </div>
       </section>
 
-      {/* Product Listings Grid: 2 columns on mobile, up to 4 on desktop */}
-      <section className="py-8 sm:py-16">
+      {/* Product Listings Grid */}
+      <section className="py-12 sm:py-16">
         <div className="site-container">
-          <div className="flex items-center justify-between mb-5 sm:mb-8 text-xs">
-            <span className="font-semibold text-navy/70">
-              Showing {filteredProducts.length} Products
+          <div className="flex items-center justify-between mb-8">
+            <span className="text-xs font-semibold text-navy/60">
+              Showing {filteredProducts.length} Official Products
             </span>
-            <div className="text-copper font-medium text-[11px] sm:text-xs">
-              <span>Free Delivery over ₹2,500</span>
+            <div className="text-xs text-copper font-medium flex items-center gap-1">
+              <span>Free Delivery on orders over ₹2,500</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="group rounded-2xl sm:rounded-3xl bg-white border border-porcelain-300 hover:border-copper/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden active:scale-99"
+                className="group rounded-3xl bg-white border border-porcelain-300 hover:border-copper/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
                 {/* Product Image Container with Authentic Photo or Neutral Unavailable Treatment */}
                 <Link
@@ -212,7 +212,7 @@ export default function StorePage() {
                         alt={product.name}
                         className={`w-full h-full ${
                           product.imageFit === "contain"
-                            ? "object-contain p-2.5 sm:p-4"
+                            ? "object-contain p-4"
                             : "object-cover object-center"
                         } transition-opacity duration-500 ${
                           product.images.back ? "group-hover:opacity-0" : ""
@@ -225,7 +225,7 @@ export default function StorePage() {
                           alt={`${product.name} alternate view`}
                           className={`w-full h-full ${
                             product.imageFit === "contain"
-                              ? "object-contain p-2.5 sm:p-4"
+                              ? "object-contain p-4"
                               : "object-cover object-center"
                           } absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                         />
@@ -236,34 +236,45 @@ export default function StorePage() {
                   )}
 
                   {product.badge && (
-                    <span className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-navy/90 text-porcelain text-[8px] sm:text-[9px] font-heading font-black uppercase tracking-wider shadow z-10">
+                    <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-navy/90 text-porcelain text-[9px] font-heading font-black uppercase tracking-wider shadow z-10">
                       {product.badge}
                     </span>
                   )}
                 </Link>
 
-                {/* Info Container */}
-                <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between">
+                {/* Details & Actions */}
+                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <span className="text-[9px] sm:text-[10px] tracking-widest text-copper font-semibold uppercase block mb-0.5 sm:mb-1">
-                      {product.category}
-                    </span>
+                    <div className="flex items-center justify-between text-[10px] tracking-widest text-copper font-semibold uppercase mb-1">
+                      <span>{product.collection}</span>
+                      <span>{product.category}</span>
+                    </div>
+
                     <Link
                       href={`/store/${product.slug}`}
-                      className="font-heading font-bold text-xs sm:text-base text-navy hover:text-copper transition-colors line-clamp-2 leading-snug"
+                      className="font-heading font-bold text-base text-navy hover:text-copper transition-colors line-clamp-2 leading-snug"
                     >
                       {product.name}
                     </Link>
+
+                    {/* Available Sizes List */}
+                    <div className="flex items-center gap-1 mt-2 text-[10px] text-navy/50 font-mono">
+                      <span>Sizes:</span>
+                      {product.sizes.map((sz) => (
+                        <span key={sz} className="px-1 bg-porcelain-100 rounded">
+                          {sz}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Price & Quick Add Button */}
-                  <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-porcelain-200 flex items-center justify-between">
+                  <div className="pt-2 border-t border-porcelain-200 flex items-center justify-between">
                     <div>
-                      <span className="font-heading font-extrabold text-sm sm:text-lg text-navy block">
+                      <span className="font-heading font-extrabold text-lg text-navy">
                         ₹{product.price.toLocaleString("en-IN")}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-[10px] sm:text-xs text-navy/40 line-through block">
+                        <span className="text-xs text-navy/40 line-through ml-2">
                           ₹{product.originalPrice.toLocaleString("en-IN")}
                         </span>
                       )}
@@ -271,10 +282,10 @@ export default function StorePage() {
 
                     <button
                       onClick={() => handleQuickAdd(product)}
-                      className="p-1.5 sm:p-2 rounded-full bg-porcelain-100 hover:bg-copper hover:text-porcelain text-navy transition-colors active:scale-95"
-                      aria-label={`Quick add ${product.name} to bag`}
+                      className="p-2.5 rounded-full bg-porcelain-200 hover:bg-copper hover:text-navy text-navy transition-colors shadow-sm"
+                      title="Quick Add to Bag"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                      <ShoppingBag className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

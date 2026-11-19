@@ -128,11 +128,6 @@ export interface Product {
   sizes: ("XS" | "S" | "M" | "L" | "XL" | "2XL")[];
   description: string;
   features: string[];
-  details?: {
-    material: string;
-    madeIn: string;
-    fit?: string;
-  };
   customizable?: boolean; // allow adding name & number
   isFeatured?: boolean;
   status?: "published" | "draft";

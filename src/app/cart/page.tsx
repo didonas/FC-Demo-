@@ -90,69 +90,65 @@ export default function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-porcelain-300 shadow-sm flex flex-col sm:flex-row gap-4 sm:gap-5 sm:items-center justify-between"
+                  className="p-5 rounded-3xl bg-white border border-porcelain-300 shadow-sm flex gap-5 items-center justify-between"
                 >
-                  <div className="flex gap-3.5 sm:gap-5 items-center flex-1 min-w-0">
-                    <div className="w-18 h-22 sm:w-24 sm:h-28 rounded-xl sm:rounded-2xl bg-porcelain-100 overflow-hidden shrink-0 border border-porcelain-200">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                  <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl bg-porcelain-100 overflow-hidden shrink-0 border border-porcelain-200">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-heading font-bold text-sm sm:text-base text-navy line-clamp-1">
-                        {item.name}
-                      </h3>
-                      <div className="text-xs text-navy/60 mt-0.5 sm:mt-1 space-x-2">
-                        <span>Size: <strong className="text-navy">{item.size}</strong></span>
-                        {item.customization && (
-                          <span className="text-copper font-semibold">
-                            • #{item.customization.number} {item.customization.name}
-                          </span>
-                        )}
-                      </div>
-                      <span className="font-heading font-extrabold text-sm text-navy block mt-1.5 sm:mt-2">
-                        ₹{item.price.toLocaleString("en-IN")} each
-                      </span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-heading font-bold text-sm sm:text-base text-navy line-clamp-1">
+                      {item.name}
+                    </h3>
+                    <div className="text-xs text-navy/60 mt-1 space-x-2">
+                      <span>Size: <strong className="text-navy">{item.size}</strong></span>
+                      {item.customization && (
+                        <span className="text-copper font-semibold">
+                          • #{item.customization.number} {item.customization.name}
+                        </span>
+                      )}
                     </div>
+                    <span className="font-heading font-extrabold text-sm text-navy block mt-2">
+                      ₹{item.price.toLocaleString("en-IN")} each
+                    </span>
                   </div>
 
                   {/* Quantity Stepper & Remove */}
-                  <div className="flex sm:flex-col items-center sm:items-end justify-between self-auto sm:self-stretch pt-2 sm:pt-0 border-t sm:border-t-0 border-porcelain-100">
+                  <div className="flex flex-col items-end justify-between self-stretch">
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="text-navy/40 hover:text-red-600 transition-colors p-1.5 order-2 sm:order-1"
+                      className="text-navy/40 hover:text-red-600 transition-colors p-1"
                       title="Remove item"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
 
-                    <div className="flex items-center gap-3 order-1 sm:order-2">
-                      <div className="flex items-center border border-porcelain-300 rounded-lg bg-porcelain-50">
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="w-7 h-7 flex items-center justify-center text-xs text-navy hover:bg-porcelain-200 font-bold active:scale-95"
-                        >
-                          -
-                        </button>
-                        <span className="w-7 text-center text-xs font-bold text-navy">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-7 h-7 flex items-center justify-center text-xs text-navy hover:bg-porcelain-200 font-bold active:scale-95"
-                        >
-                          +
-                        </button>
-                      </div>
-
-                      <span className="font-heading font-black text-sm text-navy sm:mt-2">
-                        ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+                    <div className="flex items-center border border-porcelain-300 rounded-lg bg-porcelain-50">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold"
+                      >
+                        -
+                      </button>
+                      <span className="px-2 text-xs font-bold text-navy">
+                        {item.quantity}
                       </span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold"
+                      >
+                        +
+                      </button>
                     </div>
+
+                    <span className="font-heading font-black text-sm text-navy">
+                      ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+                    </span>
                   </div>
                 </div>
               ))}
