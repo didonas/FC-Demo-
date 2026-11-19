@@ -1,9 +1,23 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ClubCrest } from "@/components/brand/ClubCrest";
-import { X, ArrowRight, Compass, Shield, Users, Calendar, Ticket, Newspaper, ShoppingBag } from "lucide-react";
+import {
+  X,
+  ArrowRight,
+  Shield,
+  Users,
+  Calendar,
+  Ticket,
+  Newspaper,
+  ShoppingBag,
+  Compass,
+  ChevronRight,
+  Flame,
+  Search,
+} from "lucide-react";
+import { useSearch } from "@/context/SearchContext";
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -11,6 +25,9 @@ interface MegaMenuProps {
 }
 
 export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
+  const { openSearch } = useSearch();
+  const [activeMobileSection, setActiveMobileSection] = useState<string | null>(null);
+
   // ESC key support
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,18 +53,63 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  const mobileNavItems = [
+    {
+      title: "First Team Squad",
+      kicker: "11 Senior Players",
+      href: "/team",
+      badge: "2026/27",
+      icon: Users,
+    },
+    {
+      title: "Matches & Fixtures",
+      kicker: "Super League & Asia",
+      href: "/matches",
+      badge: "Live Center",
+      icon: Calendar,
+    },
+    {
+      title: "The Club & Heritage",
+      kicker: "Founded 1934 • 9 Decades",
+      href: "/club",
+      badge: "History",
+      icon: Shield,
+    },
+    {
+      title: "The Meridian Stadium",
+      kicker: "62,500 Acoustic Fortress",
+      href: "/stadium",
+      badge: "Venue",
+      icon: Compass,
+    },
+    {
+      title: "Kovil Youth Academy",
+      kicker: "Next-Gen Talent",
+      href: "/academy",
+      badge: "Youth",
+      icon: Flame,
+    },
+    {
+      title: "Latest Club News",
+      kicker: "Stories & Reports",
+      href: "/news",
+      badge: "Editorial",
+      icon: Newspaper,
+    },
+  ];
+
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-navy/98 backdrop-blur-xl text-porcelain transition-all duration-300">
-      {/* Top Bar inside Mega Menu */}
-      <div className="border-b border-porcelain/10">
-        <div className="site-container flex items-center justify-between h-20 sm:h-24">
-          <div className="flex items-center gap-3">
-            <ClubCrest size={46} variant="primary" />
+      {/* Top Bar inside Menu */}
+      <div className="border-b border-porcelain/10 sticky top-0 bg-navy/95 backdrop-blur-md z-30">
+        <div className="site-container flex items-center justify-between h-16 sm:h-20 md:h-24">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <ClubCrest size={38} variant="primary" />
             <div className="flex flex-col">
-              <span className="font-heading font-black tracking-[0.14em] text-lg text-porcelain">
+              <span className="font-heading font-black tracking-[0.14em] text-base sm:text-lg text-porcelain leading-none">
                 TAMILNADU <span className="text-copper">FC</span>
               </span>
-              <span className="text-[9px] tracking-[0.24em] font-medium text-copper uppercase">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.24em] font-medium text-copper uppercase mt-0.5">
                 One State. One Passion.
               </span>
             </div>
@@ -55,17 +117,147 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
           <button
             onClick={onClose}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-porcelain/10 transition-colors text-porcelain/80 hover:text-porcelain text-xs uppercase tracking-widest font-semibold"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-porcelain/10 hover:bg-copper hover:text-navy transition-all text-porcelain text-xs uppercase tracking-widest font-semibold"
             aria-label="Close navigation"
           >
             <span>Close</span>
-            <X className="w-5 h-5 text-copper" />
+            <X className="w-4 h-4 text-copper hover:text-navy" />
           </button>
         </div>
       </div>
 
-      {/* Main Grid Content */}
-      <div className="site-container py-12 sm:py-16">
+      {/* MOBILE SPECIFIC NAVIGATION (Visible on screens < 768px) */}
+      <div className="md:hidden px-5 py-6 space-y-6">
+        {/* Quick Action Cards: Tickets & Shop */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link
+            href="/tickets"
+            onClick={onClose}
+            className="p-4 rounded-2xl bg-copper text-navy flex flex-col justify-between min-h-[100px] shadow-lg active:scale-98 transition-transform"
+          >
+            <div className="flex items-center justify-between">
+              <Ticket className="w-5 h-5 text-navy" />
+              <span className="text-[9px] font-heading font-black tracking-wider uppercase bg-navy/15 px-2 py-0.5 rounded-full">
+                From ₹800
+              </span>
+            </div>
+            <div>
+              <span className="font-heading font-extrabold text-sm block leading-tight mt-2">
+                Match Tickets
+              </span>
+              <span className="text-[10px] font-medium text-navy/80 block mt-0.5">
+                Select Seats & Stand
+              </span>
+            </div>
+          </Link>
+
+          <Link
+            href="/store"
+            onClick={onClose}
+            className="p-4 rounded-2xl bg-white/10 border border-porcelain/15 text-porcelain flex flex-col justify-between min-h-[100px] active:scale-98 transition-transform"
+          >
+            <div className="flex items-center justify-between">
+              <ShoppingBag className="w-5 h-5 text-copper" />
+              <span className="text-[9px] font-heading font-bold tracking-wider uppercase text-copper">
+                2026/27 Kits
+              </span>
+            </div>
+            <div>
+              <span className="font-heading font-extrabold text-sm block leading-tight mt-2 text-porcelain">
+                Official Store
+              </span>
+              <span className="text-[10px] font-medium text-porcelain/70 block mt-0.5">
+                Shop Authentic Gear
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Search Quick Button */}
+        <button
+          onClick={() => {
+            onClose();
+            openSearch();
+          }}
+          className="w-full flex items-center justify-between px-4 py-3 rounded-2xl bg-porcelain/5 border border-porcelain/10 text-porcelain/70 text-xs font-medium"
+        >
+          <div className="flex items-center gap-2.5">
+            <Search className="w-4 h-4 text-copper" />
+            <span>Search players, matches, tickets...</span>
+          </div>
+          <span className="text-[10px] font-mono text-copper uppercase">Tap to search</span>
+        </button>
+
+        {/* Primary Destination List with Distinct Typography */}
+        <div className="space-y-2 pt-2">
+          <span className="text-[10px] font-heading font-black tracking-[0.24em] text-copper uppercase block px-1">
+            Club Navigation
+          </span>
+          <div className="divide-y divide-porcelain/10 rounded-2xl bg-porcelain/5 border border-porcelain/10 overflow-hidden">
+            {mobileNavItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className="flex items-center justify-between p-4 active:bg-porcelain/10 transition-colors group"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-9 h-9 rounded-xl bg-porcelain/10 flex items-center justify-center text-copper group-active:text-porcelain shrink-0">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-heading font-bold text-base text-porcelain group-active:text-copper transition-colors leading-tight">
+                        {item.title}
+                      </h4>
+                      <span className="text-[11px] text-porcelain/60 block mt-0.5">
+                        {item.kicker}
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-copper/60 group-active:text-copper transition-colors shrink-0" />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Fan Zone & Supporters Card */}
+        <Link
+          href="/club#supporters"
+          onClick={onClose}
+          className="block p-4 rounded-2xl bg-gradient-to-r from-navy via-navy-800 to-copper/20 border border-copper/30"
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] font-heading font-black tracking-widest text-copper uppercase">
+              Kavalan Fan Club
+            </span>
+            <span className="text-[10px] text-copper font-mono">North Stand</span>
+          </div>
+          <h4 className="font-heading font-extrabold text-base text-porcelain mt-1">
+            Join The Marina Wall
+          </h4>
+          <p className="text-xs text-porcelain/75 mt-0.5 leading-snug">
+            Official chants, matchday drums, and supporter culture.
+          </p>
+        </Link>
+
+        {/* Mobile Social Strip & Safe Area Footer */}
+        <div className="pt-4 pb-8 border-t border-porcelain/10 flex items-center justify-between text-xs text-porcelain/60">
+          <span className="text-copper font-medium text-[11px] uppercase tracking-wider">Follow TNFC</span>
+          <div className="flex items-center gap-3 text-porcelain/80 text-xs">
+            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-copper">X</a>
+            <span>•</span>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-copper">Instagram</a>
+            <span>•</span>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-copper">YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP & TABLET MEGA MENU (Preserved for screens >= 768px) */}
+      <div className="hidden md:block site-container py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Navigation Columns (8 cols) */}
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">

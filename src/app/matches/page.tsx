@@ -52,10 +52,10 @@ export default function MatchesPage() {
       </section>
 
       {/* Main Tabs Navigation Bar */}
-      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3.5">
-        <div className="site-container flex flex-col sm:flex-row items-center justify-between gap-4">
+      <section className="sticky top-16 md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3">
+        <div className="site-container flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 overflow-hidden">
           {/* Main Tab Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto py-0.5">
             {[
               { id: "fixtures", label: "Upcoming Fixtures" },
               { id: "results", label: "Recent Results" },
@@ -64,7 +64,7 @@ export default function MatchesPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all ${
+                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all whitespace-nowrap shrink-0 active:scale-95 ${
                   activeTab === tab.id
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80"
@@ -77,14 +77,14 @@ export default function MatchesPage() {
 
           {/* Competition Filter */}
           {activeTab !== "standings" && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-navy/60 font-medium hidden md:inline">Competition:</span>
-              <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto py-0.5">
+              <span className="text-xs text-navy/60 font-medium hidden md:inline shrink-0">Competition:</span>
+              <div className="flex items-center gap-1.5 shrink-0">
                 {competitions.map((comp) => (
                   <button
                     key={comp}
                     onClick={() => setSelectedCompetition(comp)}
-                    className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-colors ${
+                    className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-colors whitespace-nowrap ${
                       selectedCompetition === comp
                         ? "bg-copper text-navy font-bold"
                         : "bg-porcelain-200 text-navy/70 hover:text-navy"
@@ -167,13 +167,13 @@ export default function MatchesPage() {
                 </div>
 
                 {/* Venue & Action Buttons */}
-                <div className="pt-6 border-t border-porcelain-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-6 border-t border-porcelain-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                   <div className="flex items-center gap-2 text-xs text-navy/60">
-                    <MapPin className="w-4 h-4 text-copper" />
+                    <MapPin className="w-4 h-4 text-copper shrink-0" />
                     <span>{match.stadium}, {match.city}</span>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
                     <Link
                       href={`/matches/${match.slug}`}
                       className="text-xs font-heading font-bold uppercase tracking-wider text-navy/70 hover:text-navy underline"
@@ -183,7 +183,7 @@ export default function MatchesPage() {
                     {match.ticketsAvailable && (
                       <Link
                         href={`/tickets/${match.id}`}
-                        className="px-5 py-2.5 rounded-full bg-navy hover:bg-copper text-porcelain text-xs font-heading font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
+                        className="px-5 py-2.5 rounded-full bg-navy hover:bg-copper text-porcelain text-xs font-heading font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
                       >
                         <Ticket className="w-3.5 h-3.5 text-copper" />
                         <span>Tickets From ₹{match.ticketStartingPrice}</span>
@@ -199,21 +199,40 @@ export default function MatchesPage() {
 
       {/* Tab 2: Recent Results */}
       {activeTab === "results" && (
-        <section className="py-12 sm:py-16">
-          <div className="site-container max-w-5xl space-y-6">
+        <section className="py-8 sm:py-16">
+          <div className="site-container max-w-5xl space-y-4 sm:space-y-6">
             {filteredResults.map((match) => (
               <div
                 key={match.id}
-                className="p-6 sm:p-8 rounded-3xl bg-white border border-porcelain-300 shadow-sm flex flex-col justify-between"
+                className="p-5 sm:p-8 rounded-3xl bg-white border border-porcelain-300 shadow-sm flex flex-col justify-between"
               >
-                <div className="flex items-center justify-between pb-6 border-b border-porcelain-200">
+                <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-porcelain-200">
                   <span className="px-3 py-1 rounded-full bg-navy text-porcelain text-[10px] font-heading font-bold uppercase tracking-wider">
                     {match.competition} • {match.roundOrMatchday}
                   </span>
                   <span className="text-xs text-navy/60">{match.date}</span>
                 </div>
 
-                <div className="py-6 sm:py-8 grid grid-cols-7 items-center text-center">
+                {/* Mobile Clash Layout (< sm) */}
+                <div className="flex sm:hidden items-center justify-between py-5 gap-2">
+                  <span className="font-heading font-extrabold text-sm text-navy flex-1 text-left leading-snug">
+                    {match.homeTeam.name}
+                  </span>
+                  <div className="flex flex-col items-center px-3 shrink-0">
+                    <span className="font-heading font-black text-2xl text-navy">
+                      {match.homeScore} - {match.awayScore}
+                    </span>
+                    <span className="text-[9px] font-bold text-green-700 uppercase tracking-widest mt-0.5">
+                      Full Time
+                    </span>
+                  </div>
+                  <span className="font-heading font-extrabold text-sm text-navy flex-1 text-right leading-snug">
+                    {match.awayTeam.name}
+                  </span>
+                </div>
+
+                {/* Desktop Clash Layout (>= sm) */}
+                <div className="hidden sm:grid sm:grid-cols-7 items-center text-center py-6 sm:py-8">
                   <div className="col-span-3 flex items-center justify-end gap-3">
                     <span className="font-heading font-extrabold text-base sm:text-xl text-navy">
                       {match.homeTeam.name}
@@ -240,11 +259,11 @@ export default function MatchesPage() {
                   </p>
                 )}
 
-                <div className="pt-4 border-t border-porcelain-200 flex items-center justify-between text-xs text-navy/60">
+                <div className="pt-4 border-t border-porcelain-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-navy/60">
                   <span>{match.stadium}, {match.city}</span>
                   <Link
                     href={`/matches/${match.slug}`}
-                    className="font-heading font-bold text-navy hover:text-copper transition-colors uppercase tracking-wider flex items-center gap-1"
+                    className="font-heading font-bold text-navy hover:text-copper transition-colors uppercase tracking-wider flex items-center gap-1 self-end sm:self-auto"
                   >
                     Full Match Report <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
@@ -257,24 +276,24 @@ export default function MatchesPage() {
 
       {/* Tab 3: League Standings Table */}
       {activeTab === "standings" && (
-        <section id="standings" className="py-12 sm:py-16">
+        <section id="standings" className="py-8 sm:py-16">
           <div className="site-container max-w-5xl">
             <div className="rounded-3xl overflow-hidden bg-white border border-porcelain-300 shadow-sm">
-              <div className="p-6 bg-porcelain-50 border-b border-porcelain-200 flex items-center justify-between">
+              <div className="p-5 sm:p-6 bg-porcelain-50 border-b border-porcelain-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <div>
-                  <h3 className="font-heading font-extrabold text-lg text-navy">
+                  <h3 className="font-heading font-extrabold text-base sm:text-lg text-navy">
                     Indian Super League Standings
                   </h3>
                   <span className="text-xs text-navy/60">Season 2026/27 • Matchday 13</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="w-3 h-3 rounded-full bg-green-500 inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-green-500 inline-block shrink-0" />
                   <span className="text-navy/70">AFC Champions League Spot</span>
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs sm:text-sm">
+              <div className="overflow-x-auto no-scrollbar">
+                <table className="w-full min-w-[560px] text-left text-xs sm:text-sm">
                   <thead className="bg-porcelain-100/70 border-b border-porcelain-200 text-[11px] font-heading font-bold text-navy/70 uppercase tracking-wider">
                     <tr>
                       <th className="py-3 px-4 text-center">Pos</th>
