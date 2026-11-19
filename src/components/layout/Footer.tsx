@@ -177,7 +177,7 @@ export const Footer: React.FC = () => {
                   placeholder="Enter your email address..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-full bg-porcelain/10 border border-porcelain/20 text-xs text-porcelain placeholder-porcelain/40 focus:outline-none focus:border-copper"
+                  className="flex-1 px-4 py-3 sm:py-2.5 rounded-full bg-porcelain/10 border border-porcelain/20 text-base sm:text-xs text-porcelain placeholder-porcelain/40 focus:outline-none focus:border-copper"
                 />
                 <button
                   type="submit"

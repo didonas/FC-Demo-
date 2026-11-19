@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams, notFound } from "next/navigation";
 import { productsData } from "@/data/productsData";
 import { useCart } from "@/context/CartContext";
-import { ArrowLeft, ArrowRight, ShoppingBag, Check, ShieldCheck, Truck, RotateCcw, Sparkles, X, Info } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShoppingBag, Check, ShieldCheck, Truck, RotateCcw, X, Info } from "lucide-react";
 import { ProductImagePlaceholder } from "@/components/store/ProductImagePlaceholder";
 
 export default function ProductDetailPage() {
@@ -69,9 +69,9 @@ export default function ProductDetailPage() {
     .slice(0, 3);
 
   return (
-    <div className="bg-[#F4F1E9] min-h-screen">
+    <div className="bg-[#F4F1E9] min-h-screen pb-24 md:pb-0">
       {/* Top Breadcrumb */}
-      <div className="site-container py-4 border-b border-porcelain-300">
+      <div className="site-container py-3 sm:py-4 border-b border-porcelain-300">
         <Link
           href="/store"
           className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy/70 hover:text-copper transition-colors"
@@ -81,13 +81,13 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Main Product Showcase Section */}
-      <section className="py-10 sm:py-16">
+      <section className="py-6 sm:py-16">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
             {/* Left: Multi-Angle Image Gallery (7 cols) */}
             <div className="lg:col-span-7 space-y-4">
               {/* Main Image Display with Optional Live Customizer Overlay */}
-              <div className="rounded-3xl overflow-hidden bg-white border border-porcelain-300 shadow-md aspect-[4/5] relative flex items-center justify-center">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-porcelain-300 shadow-md aspect-[4/5] relative flex items-center justify-center">
                 {activeImage ? (
                   /* eslint-disable-next-line @next/next/no-img-element */
                   <img
@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
                     alt={product.name}
                     className={`w-full h-full ${
                       product.imageFit === "contain"
-                        ? "object-contain p-6"
+                        ? "object-contain p-4 sm:p-6"
                         : "object-cover object-center"
                     } transition-all duration-300`}
                   />
@@ -116,7 +116,7 @@ export default function ProductDetailPage() {
                 )}
 
                 {product.badge && (
-                  <span className="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-navy/90 text-porcelain text-[10px] font-heading font-black uppercase tracking-wider shadow z-10">
+                  <span className="absolute top-3 left-3 sm:top-5 sm:left-5 px-3 py-1 rounded-full bg-navy/90 text-porcelain text-[9px] sm:text-[10px] font-heading font-black uppercase tracking-wider shadow z-10">
                     {product.badge}
                   </span>
                 )}
@@ -124,23 +124,23 @@ export default function ProductDetailPage() {
 
               {/* Gallery Thumbnail Selector */}
               {galleryImages.length > 1 && (
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-4 gap-2 sm:gap-3">
                   {galleryImages.map((img) => (
                     <button
                       key={img.key}
                       onClick={() => setActiveImageKey(img.key)}
-                      className={`rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white ${
+                      className={`rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] border-2 transition-all bg-white ${
                         activeImageKey === img.key
                           ? "border-copper shadow-md ring-2 ring-copper/30"
                           : "border-porcelain-300 hover:border-navy/40 opacity-70 hover:opacity-100"
                       }`}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */ }
                       <img
                         src={img.url}
                         alt={img.label}
                         className={`w-full h-full ${
-                          product.imageFit === "contain" ? "object-contain p-2" : "object-cover"
+                          product.imageFit === "contain" ? "object-contain p-1.5 sm:p-2" : "object-cover"
                         }`}
                       />
                     </button>
@@ -150,10 +150,10 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Right: Product Details, Customizer & Add to Bag (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
+            <div className="lg:col-span-5 space-y-5 sm:space-y-6">
               {/* Category & Collection */}
               <div>
-                <div className="flex items-center gap-2 text-xs font-heading font-black tracking-widest text-copper uppercase mb-2">
+                <div className="flex items-center gap-2 text-xs font-heading font-black tracking-widest text-copper uppercase mb-1.5 sm:mb-2">
                   <span>{product.collection}</span>
                   <span>•</span>
                   <span>{product.category}</span>
@@ -164,23 +164,23 @@ export default function ProductDetailPage() {
                 </h1>
 
                 {/* Price */}
-                <div className="flex items-baseline gap-3 mt-4">
-                  <span className="font-heading font-black text-3xl text-navy">
+                <div className="flex flex-wrap items-baseline gap-2 sm:gap-3 mt-3 sm:mt-4">
+                  <span className="font-heading font-black text-2xl sm:text-3xl text-navy">
                     ₹{unitPrice.toLocaleString("en-IN")}
                   </span>
                   {product.originalPrice && !isCustomized && (
-                    <span className="text-sm text-navy/40 line-through">
+                    <span className="text-xs sm:text-sm text-navy/40 line-through">
                       ₹{product.originalPrice.toLocaleString("en-IN")}
                     </span>
                   )}
-                  <span className="text-xs text-green-700 font-semibold bg-green-100 px-2.5 py-0.5 rounded-full">
-                    Official Authenticated Matchwear
+                  <span className="text-[10px] sm:text-xs text-green-700 font-semibold bg-green-100 px-2 py-0.5 rounded-full">
+                    Official Authenticated
                   </span>
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm text-navy/75 leading-relaxed border-t border-porcelain-200 pt-4">
+              <p className="text-xs sm:text-sm text-navy/75 leading-relaxed border-t border-porcelain-200 pt-3 sm:pt-4">
                 {product.description}
               </p>
 
@@ -192,18 +192,18 @@ export default function ProductDetailPage() {
                   </span>
                   <button
                     onClick={() => setIsSizeGuideOpen(true)}
-                    className="text-copper font-medium hover:underline flex items-center gap-1"
+                    className="text-copper font-medium hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <Info className="w-3.5 h-3.5" /> Size Guide
                   </button>
                 </div>
 
-                <div className="grid grid-cols-6 gap-2">
+                <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
                   {product.sizes.map((sz) => (
                     <button
                       key={sz}
                       onClick={() => setSelectedSize(sz)}
-                      className={`h-11 rounded-xl text-xs font-heading font-bold transition-all ${
+                      className={`h-11 rounded-xl text-xs font-heading font-bold transition-all active:scale-95 cursor-pointer ${
                         selectedSize === sz
                           ? "bg-navy text-porcelain ring-2 ring-copper shadow-sm"
                           : "bg-white hover:bg-porcelain-200 text-navy border border-porcelain-300"
@@ -232,7 +232,7 @@ export default function ProductDetailPage() {
                       <span>Add Official Name & Number (+₹{customizationFee})</span>
                     </label>
                     <span className="text-[10px] font-bold text-copper uppercase">
-                      Player Specification
+                      Player Spec
                     </span>
                   </div>
 
@@ -248,7 +248,7 @@ export default function ProductDetailPage() {
                           value={customName}
                           onChange={(e) => setCustomName(e.target.value.toUpperCase())}
                           placeholder="e.g. VARADHAN"
-                          className="w-full px-3 py-2 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy uppercase focus:outline-none focus:border-copper"
+                          className="w-full px-3 py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy uppercase focus:outline-none focus:border-copper"
                         />
                       </div>
                       <div>
@@ -262,7 +262,7 @@ export default function ProductDetailPage() {
                           value={customNumber}
                           onChange={(e) => setCustomNumber(e.target.value)}
                           placeholder="10"
-                          className="w-full px-3 py-2 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy focus:outline-none focus:border-copper"
+                          className="w-full px-3 py-2.5 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 font-heading font-bold text-navy focus:outline-none focus:border-copper"
                         />
                       </div>
                     </div>
@@ -270,14 +270,14 @@ export default function ProductDetailPage() {
                 </div>
               )}
 
-              {/* Quantity & Add to Bag CTA */}
+              {/* Desktop Quantity & Add to Bag CTA */}
               <div className="pt-2 space-y-3">
                 <div className="flex gap-3">
                   {/* Quantity Stepper */}
                   <div className="flex items-center border border-porcelain-300 rounded-full bg-white px-3 py-2">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="text-navy hover:text-copper px-2 text-sm font-bold"
+                      className="text-navy hover:text-copper px-2 text-sm font-bold cursor-pointer"
                     >
                       -
                     </button>
@@ -286,7 +286,7 @@ export default function ProductDetailPage() {
                     </span>
                     <button
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="text-navy hover:text-copper px-2 text-sm font-bold"
+                      className="text-navy hover:text-copper px-2 text-sm font-bold cursor-pointer"
                     >
                       +
                     </button>
@@ -295,7 +295,7 @@ export default function ProductDetailPage() {
                   {/* Add to Bag Button */}
                   <button
                     onClick={handleAddToCart}
-                    className="flex-1 py-4 px-6 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group cursor-pointer"
+                    className="flex-1 py-4 px-6 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group cursor-pointer active:scale-95"
                   >
                     <ShoppingBag className="w-4 h-4 text-copper" />
                     <span>Add to Bag • ₹{(unitPrice * quantity).toLocaleString("en-IN")}</span>
@@ -339,6 +339,26 @@ export default function ProductDetailPage() {
         </div>
       </section>
 
+      {/* Sticky Add-to-Bag Bottom Bar for Mobile (Real Madrid UX) */}
+      <div className="fixed bottom-0 inset-x-0 z-40 bg-navy/95 backdrop-blur-md border-t border-porcelain/15 p-3.5 shadow-2xl flex md:hidden items-center justify-between gap-3">
+        <div>
+          <span className="text-[10px] uppercase tracking-wider text-porcelain/60 block font-semibold">
+            Size: {selectedSize} • Qty {quantity}
+          </span>
+          <strong className="text-base font-heading font-black text-copper">
+            ₹{(unitPrice * quantity).toLocaleString("en-IN")}
+          </strong>
+        </div>
+
+        <button
+          onClick={handleAddToCart}
+          className="px-6 py-3 rounded-full bg-copper hover:bg-copper-400 text-navy font-heading font-black text-xs uppercase tracking-wider shadow-lg flex items-center gap-1.5 active:scale-95 transition-transform cursor-pointer"
+        >
+          <ShoppingBag className="w-4 h-4 text-navy" />
+          <span>Add to Bag</span>
+        </button>
+      </div>
+
       {/* Size Guide Modal */}
       {isSizeGuideOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 backdrop-blur-sm p-4">
@@ -349,7 +369,7 @@ export default function ProductDetailPage() {
               </h3>
               <button
                 onClick={() => setIsSizeGuideOpen(false)}
-                className="p-1 rounded-full hover:bg-porcelain-200 text-navy/60 hover:text-navy"
+                className="p-1 rounded-full hover:bg-porcelain-200 text-navy/60 hover:text-navy cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -381,7 +401,7 @@ export default function ProductDetailPage() {
             <div className="pt-2 text-right">
               <button
                 onClick={() => setIsSizeGuideOpen(false)}
-                className="px-5 py-2 rounded-full bg-navy text-porcelain text-xs font-semibold"
+                className="px-5 py-2 rounded-full bg-navy text-porcelain text-xs font-semibold cursor-pointer"
               >
                 Close Guide
               </button>
@@ -398,14 +418,14 @@ export default function ProductDetailPage() {
               Complete the Matchday Look
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {relatedProducts.map((rel) => (
                 <Link
                   key={rel.id}
                   href={`/store/${rel.slug}`}
                   className="group p-4 rounded-2xl bg-white border border-porcelain-300 hover:border-copper/40 shadow-sm transition-all flex items-center gap-4"
                 >
-                  <div className="w-20 h-20 rounded-xl bg-porcelain-100 overflow-hidden shrink-0">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-porcelain-100 overflow-hidden shrink-0">
                     {rel.images.front ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
                       <img

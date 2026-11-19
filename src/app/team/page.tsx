@@ -101,14 +101,14 @@ export default function TeamPage() {
       </section>
 
       {/* Position Filter Bar */}
-      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-4 shadow-sm">
+      <section className="sticky top-16 md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3 sm:py-4 shadow-sm">
         <div className="site-container flex items-center justify-center">
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto sm:justify-center px-4 sm:px-0">
             {positions.map((pos) => (
               <button
                 key={pos.value}
                 onClick={() => setSelectedPosition(pos.value)}
-                className={`px-4 sm:px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
+                className={`shrink-0 px-3.5 sm:px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-200 flex items-center gap-1.5 ${
                   selectedPosition === pos.value
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80 hover:text-navy"
@@ -133,12 +133,12 @@ export default function TeamPage() {
       {/* Players Grid */}
       <section className="py-12 sm:py-20">
         <div className="site-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
             {filteredPlayers.map((player) => (
               <Link
                 key={player.id}
                 href={`/team/${player.slug}`}
-                className="group rounded-3xl overflow-hidden bg-white border border-porcelain-300 hover:border-copper/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1.5"
+                className="group rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-porcelain-300 hover:border-copper/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform hover:-translate-y-1.5"
               >
                 {/* Image Aspect Container */}
                 <div className="relative aspect-[4/5] bg-navy overflow-hidden">
@@ -150,51 +150,51 @@ export default function TeamPage() {
 
                   {/* Top Badges */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-navy/80 backdrop-blur-md text-porcelain text-[10px] font-heading font-bold tracking-widest uppercase border border-porcelain/15">
+                    <span className="px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-navy/80 backdrop-blur-md text-porcelain text-[9px] sm:text-[10px] font-heading font-bold tracking-widest uppercase border border-porcelain/15">
                       {player.position}
                     </span>
-                    <span className="font-heading font-black text-3xl sm:text-4xl text-porcelain/40 group-hover:text-copper transition-colors">
+                    <span className="font-heading font-black text-2xl sm:text-4xl text-porcelain/40 group-hover:text-copper transition-colors">
                       #{player.shirtNumber}
                     </span>
                   </div>
 
                   {/* Bottom Text Over Image */}
                   <div className="absolute bottom-4 left-4 right-4 text-porcelain">
-                    <span className="text-[10px] tracking-widest text-copper font-semibold uppercase block">
+                    <span className="text-[9px] sm:text-[10px] tracking-widest text-copper font-semibold uppercase block truncate">
                       {player.role}
                     </span>
-                    <h3 className="font-heading font-extrabold text-xl text-porcelain mt-0.5 group-hover:text-copper transition-colors">
+                    <h3 className="font-heading font-extrabold text-sm sm:text-xl text-porcelain mt-0.5 group-hover:text-copper transition-colors truncate">
                       {player.name}
                     </h3>
                   </div>
                 </div>
 
                 {/* Player Quick Stats Snapshot with refined vertical spacing */}
-                <div className="p-5 bg-white space-y-4">
-                  <div className="grid grid-cols-3 gap-2 text-center pt-3.5 pb-3 px-2 sm:px-3 bg-porcelain-50 rounded-2xl border border-porcelain-200">
+                <div className="p-3 sm:p-5 bg-white space-y-3 sm:space-y-4">
+                  <div className="grid grid-cols-3 gap-1 sm:gap-2 text-center pt-2 sm:pt-3.5 pb-2 sm:pb-3 px-1.5 sm:px-3 bg-porcelain-50 rounded-xl sm:rounded-2xl border border-porcelain-200">
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
+                      <span className="text-[8px] sm:text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         Appearances
                       </span>
-                      <strong className="font-heading font-bold text-sm text-navy block mt-1">
+                      <strong className="font-heading font-bold text-xs sm:text-sm text-navy block mt-0.5 sm:mt-1">
                         {player.stats.appearances}
                       </strong>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
+                      <span className="text-[8px] sm:text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         {player.position === "Goalkeeper" ? "Clean Sheets" : "Goals"}
                       </span>
-                      <strong className="font-heading font-bold text-sm text-copper block mt-1">
+                      <strong className="font-heading font-bold text-xs sm:text-sm text-copper block mt-0.5 sm:mt-1">
                         {player.position === "Goalkeeper"
                           ? player.stats.cleanSheets || 0
                           : player.stats.goals}
                       </strong>
                     </div>
                     <div>
-                      <span className="text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
+                      <span className="text-[8px] sm:text-[10px] uppercase tracking-wider text-navy/60 font-semibold block leading-tight">
                         {player.position === "Goalkeeper" ? "Saves Rate" : "Assists"}
                       </span>
-                      <strong className="font-heading font-bold text-sm text-navy block mt-1">
+                      <strong className="font-heading font-bold text-xs sm:text-sm text-navy block mt-0.5 sm:mt-1">
                         {player.position === "Goalkeeper"
                           ? `${player.stats.passingAccuracy}%`
                           : player.stats.assists}
@@ -202,7 +202,7 @@ export default function TeamPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-navy/70 pt-2 border-t border-porcelain-200">
+                  <div className="flex items-center justify-between text-[11px] sm:text-xs text-navy/70 pt-2 border-t border-porcelain-200">
                     <span>
                       Age: <strong>{player.age}</strong> • {player.height}
                     </span>

@@ -51,14 +51,14 @@ export default function NewsHubPage() {
       </section>
 
       {/* Category Filter Tabs Bar */}
-      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3.5">
+      <section className="sticky top-16 md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3">
         <div className="site-container flex items-center justify-center">
-          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto sm:justify-center px-4 sm:px-0">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all ${
+                className={`shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all ${
                   selectedCategory === cat
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80"

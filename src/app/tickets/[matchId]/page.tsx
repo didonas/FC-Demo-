@@ -165,7 +165,7 @@ export default function StadiumSeatingPage() {
       </div>
 
       {/* Booking Header */}
-      <section className="bg-navy text-porcelain py-8 sm:py-10 border-b border-porcelain/15">
+      <section className="bg-navy text-porcelain py-6 sm:py-10 border-b border-porcelain/15">
         <div className="site-container">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -192,10 +192,288 @@ export default function StadiumSeatingPage() {
         </div>
       </section>
 
-      {/* Main Seating Map & Checkout Grid */}
-      <section className="py-8 sm:py-12">
+      {/* Main Seating Map & Checkout Container */}
+      <section className="py-6 sm:py-12">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+          {/* ======================================================== */}
+          {/* MOBILE DEDICATED SEATING & BOOKING EXPERIENCE (< lg)    */}
+          {/* ======================================================== */}
+          <div className="block lg:hidden space-y-5 pb-24">
+            {/* 1. Mobile Stand Selection Rail */}
+            <div>
+              <span className="text-[10px] font-heading font-black text-copper uppercase tracking-wider block mb-2">
+                Step 1: Choose Stand
+              </span>
+              <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                {[
+                  { id: "West Stand", label: "West Stand", tag: "VIP • ₹2.2k-5.5k" },
+                  { id: "East Stand", label: "East Stand", tag: "Bay View • ₹2.2k" },
+                  { id: "North Stand", label: "North Stand", tag: "Ultras • ₹800" },
+                  { id: "South Stand", label: "South Stand", tag: "Chola End • ₹800" },
+                ].map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setSelectedStand(s.id as any)}
+                    className={`shrink-0 px-4 py-2.5 rounded-2xl text-left border transition-all ${
+                      selectedStand === s.id
+                        ? "bg-navy text-porcelain border-navy shadow-md"
+                        : "bg-white text-navy/70 border-porcelain-300"
+                    }`}
+                  >
+                    <span className="block font-heading font-bold text-xs">{s.label}</span>
+                    <span className={`block text-[10px] mt-0.5 ${selectedStand === s.id ? "text-copper" : "text-navy/50"}`}>
+                      {s.tag}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 2. Mobile Pitch Orientation Cue */}
+            <div className="py-2 px-3 rounded-xl bg-emerald-950/90 border border-emerald-700/40 text-center flex items-center justify-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[10px] font-heading font-black text-emerald-100 tracking-widest uppercase">
+                ▲ PITCH / MERIDIAN TURF THIS WAY ▲
+              </span>
+            </div>
+
+            {/* 3. Mobile Touch Seat Matrix (2 Banks with Center Aisle) */}
+            <div className="p-4 sm:p-5 rounded-3xl bg-white border border-porcelain-300 shadow-sm space-y-4">
+              <div className="flex items-center justify-between pb-2 border-b border-porcelain-200">
+                <div>
+                  <h3 className="font-heading font-black text-sm text-navy">
+                    {selectedStand} Seating
+                  </h3>
+                  <p className="text-[11px] text-navy/60">Tap any block to select</p>
+                </div>
+                <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-porcelain-100 text-copper border border-porcelain-300">
+                  {selectedSeatIds.length} / 6 Seats
+                </span>
+              </div>
+
+              {/* Rows */}
+              <div className="space-y-3">
+                {["Row 1", "Row 2", "Row 3", "Row 4"].map((rowLabel, rIdx) => {
+                  const rowSeats = seatsForActiveStand.slice(rIdx * 10, (rIdx + 1) * 10);
+                  const bankA = rowSeats.slice(0, 5);
+                  const bankB = rowSeats.slice(5, 10);
+                  const rowCode = rowSeats[0]?.row || `R${rIdx + 1}`;
+
+                  return (
+                    <div key={rowLabel} className="space-y-1">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-navy/50 px-0.5">
+                        <span>Row {rowCode}</span>
+                        <span className="text-navy/70">₹{rowSeats[0]?.price.toLocaleString("en-IN")}</span>
+                      </div>
+                      <div className="grid grid-cols-11 gap-1 items-center">
+                        {/* Bank A (Seats 1-5) */}
+                        {bankA.map((seat) => {
+                          const isOccupied = seat.status === "occupied";
+                          const isSelected = selectedSeatIds.includes(seat.id);
+                          return (
+                            <button
+                              key={seat.id}
+                              disabled={isOccupied}
+                              onClick={() => handleToggleSeat(seat)}
+                              className={`h-10 rounded-lg font-mono text-xs font-bold transition-all flex items-center justify-center active:scale-95 ${
+                                isOccupied
+                                  ? "bg-navy/10 text-navy/25 cursor-not-allowed border border-navy/10"
+                                  : isSelected
+                                  ? "bg-copper text-navy ring-2 ring-navy font-black shadow-md scale-105"
+                                  : "bg-white hover:bg-copper/20 text-navy border border-porcelain-300"
+                              }`}
+                            >
+                              {seat.number}
+                            </button>
+                          );
+                        })}
+
+                        {/* Aisle Divider */}
+                        <div className="text-[9px] font-mono text-center text-navy/25 uppercase select-none">
+                          |
+                        </div>
+
+                        {/* Bank B (Seats 6-10) */}
+                        {bankB.map((seat) => {
+                          const isOccupied = seat.status === "occupied";
+                          const isSelected = selectedSeatIds.includes(seat.id);
+                          return (
+                            <button
+                              key={seat.id}
+                              disabled={isOccupied}
+                              onClick={() => handleToggleSeat(seat)}
+                              className={`h-10 rounded-lg font-mono text-xs font-bold transition-all flex items-center justify-center active:scale-95 ${
+                                isOccupied
+                                  ? "bg-navy/10 text-navy/25 cursor-not-allowed border border-navy/10"
+                                  : isSelected
+                                  ? "bg-copper text-navy ring-2 ring-navy font-black shadow-md scale-105"
+                                  : "bg-white hover:bg-copper/20 text-navy border border-porcelain-300"
+                              }`}
+                            >
+                              {seat.number}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Seat Legend */}
+              <div className="flex items-center justify-around pt-3 text-[11px] text-navy/70 border-t border-porcelain-200">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3.5 h-3.5 rounded bg-white border border-navy/40" />
+                  <span>Available</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3.5 h-3.5 rounded bg-copper" />
+                  <span className="font-bold text-navy">Selected</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-3.5 h-3.5 rounded bg-navy/20" />
+                  <span className="text-navy/40">Occupied</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 4. Selected Seats Pill List */}
+            {selectedSeatsList.length > 0 && (
+              <div className="p-4 rounded-2xl bg-white border border-porcelain-300 shadow-sm space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-heading font-extrabold text-xs text-navy uppercase tracking-wider">
+                    Selected Seats ({selectedSeatsList.length})
+                  </h4>
+                  <span className="text-xs font-bold text-copper">
+                    Subtotal: ₹{subtotal.toLocaleString("en-IN")}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {selectedSeatsList.map((st) => (
+                    <button
+                      key={st.id}
+                      onClick={() => handleToggleSeat(st as any)}
+                      className="px-3 py-1.5 rounded-xl bg-porcelain-100 hover:bg-red-50 border border-porcelain-300 hover:border-red-200 text-navy hover:text-red-600 text-xs font-mono font-bold flex items-center gap-1.5 transition-colors"
+                      title="Tap to remove"
+                    >
+                      <span>{st.stand.split(" ")[0]} {st.row}-{st.number} (₹{st.price})</span>
+                      <span className="text-navy/40">×</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 5. Mobile Checkout Details Form */}
+            <form id="mobile-booking-form" onSubmit={handleCheckoutSubmit} className="p-5 rounded-3xl bg-white border border-porcelain-300 shadow-sm space-y-4">
+              <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-navy">
+                Ticket Holder Information
+              </h4>
+
+              <div>
+                <label className="text-[10px] uppercase font-bold text-navy/60 block mb-1">
+                  Full Name *
+                </label>
+                <div className="relative">
+                  <User className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-navy/40" />
+                  <input
+                    type="text"
+                    required
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    className="w-full pl-9 pr-3 py-3 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                    placeholder="Your full name"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-[10px] uppercase font-bold text-navy/60 block mb-1">
+                  Email Address *
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-navy/40" />
+                  <input
+                    type="email"
+                    required
+                    value={customerEmail}
+                    onChange={(e) => setCustomerEmail(e.target.value)}
+                    className="w-full pl-9 pr-3 py-3 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                    placeholder="you@example.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-[10px] uppercase font-bold text-navy/60 block mb-1">
+                  Phone Number *
+                </label>
+                <div className="relative">
+                  <Phone className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-navy/40" />
+                  <input
+                    type="tel"
+                    required
+                    value={customerPhone}
+                    onChange={(e) => setCustomerPhone(e.target.value)}
+                    className="w-full pl-9 pr-3 py-3 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy"
+                    placeholder="+91 98400 12345"
+                  />
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl bg-copper/10 border border-copper/30 text-[11px] text-navy/80 flex items-start gap-2">
+                <Info className="w-4 h-4 text-copper shrink-0 mt-0.5" />
+                <span>
+                  <strong>Demonstration Booking:</strong> No real payment is required. Completing this step generates a simulated official digital match pass.
+                </span>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting || selectedSeatIds.length === 0}
+                className="w-full py-3.5 rounded-full bg-navy hover:bg-copper disabled:opacity-50 text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <span>
+                  {isSubmitting ? "Generating Demo Pass..." : `Confirm Booking • ₹${total.toLocaleString("en-IN")}`}
+                </span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
+
+            {/* Sticky Mobile Booking Bottom Bar */}
+            <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-porcelain-300 px-4 py-3 shadow-2xl">
+              <div className="site-container max-w-lg flex items-center justify-between gap-3">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-navy/50 tracking-wider block">
+                    {selectedSeatIds.length} {selectedSeatIds.length === 1 ? "Seat" : "Seats"} Selected
+                  </span>
+                  <span className="font-heading font-black text-lg text-copper block leading-tight">
+                    ₹{total.toLocaleString("en-IN")}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const formEl = document.getElementById("mobile-booking-form");
+                    if (formEl) {
+                      formEl.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  disabled={selectedSeatIds.length === 0}
+                  className="px-6 py-3 rounded-full bg-navy hover:bg-copper disabled:opacity-50 text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md flex items-center gap-2"
+                >
+                  <span>{selectedSeatIds.length === 0 ? "Select Seats" : "Proceed to Pass"}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* ======================================================== */}
+          {/* DESKTOP SEATING EXPERIENCE (lg:grid) — 100% PRESERVED   */}
+          {/* ======================================================== */}
+          <div className="hidden lg:grid lg:grid-cols-12 gap-8">
             {/* Left Column: Interactive Stadium Overhead Blueprint (7 cols) */}
             <div className="lg:col-span-7 space-y-6">
               {/* Stand Selector Tabs */}

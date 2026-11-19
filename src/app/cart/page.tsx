@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { Plus, Minus, Trash2, ShoppingBag, ArrowRight, Tag, Check, Truck, ArrowLeft } from "lucide-react";
+import { Trash2, ShoppingBag, ArrowRight, Tag, Check, ArrowLeft } from "lucide-react";
 
 export default function CartPage() {
   const {
@@ -41,10 +41,10 @@ export default function CartPage() {
   };
 
   return (
-    <div className="bg-[#F4F1E9] min-h-screen py-10 sm:py-16">
+    <div className="bg-[#F4F1E9] min-h-screen py-6 sm:py-16">
       <div className="site-container max-w-5xl">
         {/* Breadcrumb */}
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <Link
             href="/store"
             className="inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-wider text-navy/70 hover:text-copper transition-colors"
@@ -53,21 +53,21 @@ export default function CartPage() {
           </Link>
         </div>
 
-        <div className="mb-8">
-          <span className="text-xs font-heading font-black tracking-[0.2em] text-copper uppercase block mb-1">
+        <div className="mb-6 sm:mb-8">
+          <span className="text-[10px] sm:text-xs font-heading font-black tracking-[0.2em] text-copper uppercase block mb-1">
             Official Club Store
           </span>
-          <h1 className="font-heading font-black text-3xl sm:text-4xl text-navy">
+          <h1 className="font-heading font-black text-2xl sm:text-4xl text-navy">
             Your Shopping Bag ({itemsCount})
           </h1>
         </div>
 
         {items.length === 0 ? (
-          <div className="p-12 sm:p-16 rounded-3xl bg-white border border-porcelain-300 text-center shadow-sm max-w-xl mx-auto space-y-4">
+          <div className="p-8 sm:p-16 rounded-3xl bg-white border border-porcelain-300 text-center shadow-sm max-w-xl mx-auto space-y-4">
             <div className="w-16 h-16 rounded-full bg-porcelain-100 text-copper flex items-center justify-center mx-auto mb-2">
               <ShoppingBag className="w-8 h-8" />
             </div>
-            <h2 className="font-heading font-extrabold text-xl text-navy">
+            <h2 className="font-heading font-extrabold text-lg sm:text-xl text-navy">
               Your bag is currently empty
             </h2>
             <p className="text-xs sm:text-sm text-navy/60 max-w-sm mx-auto leading-relaxed">
@@ -84,15 +84,15 @@ export default function CartPage() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             {/* Items Table / List (7 cols) */}
-            <div className="lg:col-span-7 space-y-4">
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 rounded-3xl bg-white border border-porcelain-300 shadow-sm flex gap-5 items-center justify-between"
+                  className="p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl bg-white border border-porcelain-300 shadow-sm flex gap-3 sm:gap-5 items-center justify-between"
                 >
-                  <div className="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl bg-porcelain-100 overflow-hidden shrink-0 border border-porcelain-200">
+                  <div className="w-16 h-20 sm:w-24 sm:h-28 rounded-xl sm:rounded-2xl bg-porcelain-100 overflow-hidden shrink-0 border border-porcelain-200">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.image}
@@ -102,24 +102,24 @@ export default function CartPage() {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-heading font-bold text-sm sm:text-base text-navy line-clamp-1">
+                    <h3 className="font-heading font-bold text-xs sm:text-base text-navy line-clamp-1">
                       {item.name}
                     </h3>
-                    <div className="text-xs text-navy/60 mt-1 space-x-2">
+                    <div className="text-[11px] sm:text-xs text-navy/60 mt-0.5 sm:mt-1 space-x-1 sm:space-x-2">
                       <span>Size: <strong className="text-navy">{item.size}</strong></span>
                       {item.customization && (
-                        <span className="text-copper font-semibold">
+                        <span className="text-copper font-semibold block sm:inline">
                           • #{item.customization.number} {item.customization.name}
                         </span>
                       )}
                     </div>
-                    <span className="font-heading font-extrabold text-sm text-navy block mt-2">
+                    <span className="font-heading font-extrabold text-xs sm:text-sm text-navy block mt-1 sm:mt-2">
                       ₹{item.price.toLocaleString("en-IN")} each
                     </span>
                   </div>
 
                   {/* Quantity Stepper & Remove */}
-                  <div className="flex flex-col items-end justify-between self-stretch">
+                  <div className="flex flex-col items-end justify-between self-stretch shrink-0">
                     <button
                       onClick={() => removeItem(item.id)}
                       className="text-navy/40 hover:text-red-600 transition-colors p-1"
@@ -131,7 +131,7 @@ export default function CartPage() {
                     <div className="flex items-center border border-porcelain-300 rounded-lg bg-porcelain-50">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold"
+                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold active:scale-95"
                       >
                         -
                       </button>
@@ -140,13 +140,13 @@ export default function CartPage() {
                       </span>
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold"
+                        className="px-2 py-1 text-xs text-navy hover:bg-porcelain-200 font-bold active:scale-95"
                       >
                         +
                       </button>
                     </div>
 
-                    <span className="font-heading font-black text-sm text-navy">
+                    <span className="font-heading font-black text-xs sm:text-sm text-navy">
                       ₹{(item.price * item.quantity).toLocaleString("en-IN")}
                     </span>
                   </div>
@@ -156,8 +156,8 @@ export default function CartPage() {
 
             {/* Order Summary & Coupon (5 cols) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="p-6 sm:p-8 rounded-3xl bg-white border border-porcelain-300 shadow-sm space-y-5">
-                <h3 className="font-heading font-extrabold text-lg text-navy">
+              <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-white border border-porcelain-300 shadow-sm space-y-4 sm:space-y-5">
+                <h3 className="font-heading font-extrabold text-base sm:text-lg text-navy">
                   Order Summary
                 </h3>
 
@@ -172,7 +172,7 @@ export default function CartPage() {
                           placeholder="Promo code (e.g. ONEPASSION)"
                           value={couponInput}
                           onChange={(e) => setCouponInput(e.target.value)}
-                          className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy uppercase"
+                          className="w-full pl-9 pr-3 py-2 text-base sm:text-xs rounded-xl border border-porcelain-300 bg-porcelain-50 focus:outline-none focus:border-copper font-medium text-navy uppercase"
                         />
                       </div>
                       <button
@@ -204,7 +204,7 @@ export default function CartPage() {
                 </div>
 
                 {/* Subtotal & Breakdown */}
-                <div className="space-y-2.5 text-xs text-navy/70 pt-4 border-t border-porcelain-200">
+                <div className="space-y-2 text-xs text-navy/70 pt-3 sm:pt-4 border-t border-porcelain-200">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
                     <span className="font-bold text-navy">₹{subtotal.toLocaleString("en-IN")}</span>
@@ -225,7 +225,7 @@ export default function CartPage() {
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between text-base font-heading font-black text-navy pt-3 border-t border-porcelain-200">
+                  <div className="flex justify-between text-base font-heading font-black text-navy pt-2.5 sm:pt-3 border-t border-porcelain-200">
                     <span>Total</span>
                     <span className="text-copper">₹{total.toLocaleString("en-IN")}</span>
                   </div>
@@ -235,7 +235,7 @@ export default function CartPage() {
                 <div className="pt-2">
                   <Link
                     href="/checkout"
-                    className="w-full py-4 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group"
+                    className="w-full py-4 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group active:scale-95"
                   >
                     <span>Proceed to Checkout</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

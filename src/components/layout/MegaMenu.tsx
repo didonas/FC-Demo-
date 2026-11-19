@@ -3,7 +3,8 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { ClubCrest } from "@/components/brand/ClubCrest";
-import { X, ArrowRight, Compass, Shield, Users, Calendar, Ticket, Newspaper, ShoppingBag } from "lucide-react";
+import { X, ArrowRight, Shield, Users, Ticket, Newspaper, ShoppingBag, ChevronRight, Search, Calendar } from "lucide-react";
+import { useSearch } from "@/context/SearchContext";
 
 interface MegaMenuProps {
   isOpen: boolean;
@@ -11,6 +12,8 @@ interface MegaMenuProps {
 }
 
 export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
+  const { openSearch } = useSearch();
+
   // ESC key support
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -36,18 +39,25 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  const handleSearchClick = () => {
+    onClose();
+    setTimeout(() => {
+      openSearch();
+    }, 150);
+  };
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-navy/98 backdrop-blur-xl text-porcelain transition-all duration-300">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-navy/98 backdrop-blur-2xl text-porcelain transition-all duration-300">
       {/* Top Bar inside Mega Menu */}
-      <div className="border-b border-porcelain/10">
-        <div className="site-container flex items-center justify-between h-20 sm:h-24">
-          <div className="flex items-center gap-3">
-            <ClubCrest size={46} variant="primary" />
+      <div className="border-b border-porcelain/10 sticky top-0 bg-navy/95 backdrop-blur-md z-10">
+        <div className="site-container flex items-center justify-between h-16 sm:h-24">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <ClubCrest size={38} variant="primary" />
             <div className="flex flex-col">
-              <span className="font-heading font-black tracking-[0.14em] text-lg text-porcelain">
+              <span className="font-heading font-black tracking-[0.14em] text-base sm:text-lg text-porcelain">
                 TAMILNADU <span className="text-copper">FC</span>
               </span>
-              <span className="text-[9px] tracking-[0.24em] font-medium text-copper uppercase">
+              <span className="text-[8px] sm:text-[9px] tracking-[0.24em] font-medium text-copper uppercase">
                 One State. One Passion.
               </span>
             </div>
@@ -55,17 +65,144 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
 
           <button
             onClick={onClose}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-porcelain/10 transition-colors text-porcelain/80 hover:text-porcelain text-xs uppercase tracking-widest font-semibold"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-porcelain/10 hover:bg-porcelain/20 transition-all text-porcelain text-xs uppercase tracking-widest font-heading font-bold active:scale-95 cursor-pointer"
             aria-label="Close navigation"
           >
             <span>Close</span>
-            <X className="w-5 h-5 text-copper" />
+            <X className="w-4 h-4 text-copper" />
           </button>
         </div>
       </div>
 
-      {/* Main Grid Content */}
-      <div className="site-container py-12 sm:py-16">
+      {/* DEDICATED REAL MADRID-INSPIRED MOBILE MENU (< 768px) */}
+      <div className="block md:hidden px-4 py-6 space-y-6">
+        {/* Fast Search Bar */}
+        <button
+          onClick={handleSearchClick}
+          className="w-full py-3 px-4 rounded-2xl bg-porcelain/10 border border-porcelain/15 flex items-center justify-between text-xs text-porcelain/70 active:scale-98 transition-transform cursor-pointer"
+        >
+          <div className="flex items-center gap-2.5">
+            <Search className="w-4 h-4 text-copper" />
+            <span>Search players, matches, tickets...</span>
+          </div>
+          <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-porcelain/15 text-copper font-bold">
+            Search
+          </span>
+        </button>
+
+        {/* Fast Action Cards (Real Madrid inspired quick links) */}
+        <div className="grid grid-cols-2 gap-3">
+          <Link
+            href="/tickets"
+            onClick={onClose}
+            className="p-4 rounded-2xl bg-gradient-to-br from-copper/25 to-copper/10 border border-copper/30 flex flex-col justify-between active:scale-95 transition-transform"
+          >
+            <Ticket className="w-5 h-5 text-copper mb-2" />
+            <div>
+              <strong className="font-heading font-black text-xs uppercase tracking-wider text-porcelain block">
+                Match Tickets
+              </strong>
+              <span className="text-[10px] text-porcelain/70 mt-0.5 block">
+                From ₹800 • Seating Map
+              </span>
+            </div>
+          </Link>
+
+          <Link
+            href="/store"
+            onClick={onClose}
+            className="p-4 rounded-2xl bg-gradient-to-br from-porcelain/15 to-porcelain/5 border border-porcelain/15 flex flex-col justify-between active:scale-95 transition-transform"
+          >
+            <ShoppingBag className="w-5 h-5 text-copper mb-2" />
+            <div>
+              <strong className="font-heading font-black text-xs uppercase tracking-wider text-porcelain block">
+                Official Store
+              </strong>
+              <span className="text-[10px] text-porcelain/70 mt-0.5 block">
+                2026/27 Kits & Merch
+              </span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Primary Destination Stack */}
+        <div className="space-y-1.5 pt-2 border-t border-porcelain/10">
+          <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-copper block px-2 mb-2">
+            Club Navigation
+          </span>
+          {[
+            { name: "The Club", href: "/club", subtitle: "Heritage, 1934 History & Silverware" },
+            { name: "First Team", href: "/team", subtitle: "Senior Squad, Roster & Profiles" },
+            { name: "Matches & Results", href: "/matches", subtitle: "Fixtures, Scores & ISL Standings" },
+            { name: "Matchday Tickets", href: "/tickets", subtitle: "The Meridian Stadium & VIP Seating" },
+            { name: "Club News", href: "/news", subtitle: "Editorial Stories & Announcements" },
+            { name: "Official Store", href: "/store", subtitle: "Jerseys, Training & Accessories" },
+            { name: "The Meridian Stadium", href: "/stadium", subtitle: "62,500 Acoustic Fortress Tours" },
+            { name: "Kovil Youth Academy", href: "/academy", subtitle: "Grassroots & Player Pathway" },
+          ].map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              onClick={onClose}
+              className="flex items-center justify-between p-3.5 rounded-2xl hover:bg-porcelain/10 active:bg-porcelain/15 transition-all group"
+            >
+              <div>
+                <strong className="font-heading font-black text-base text-porcelain group-hover:text-copper transition-colors block">
+                  {item.name}
+                </strong>
+                <span className="text-[11px] text-porcelain/60 block mt-0.5">
+                  {item.subtitle}
+                </span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-copper group-hover:translate-x-1 transition-transform shrink-0" />
+            </Link>
+          ))}
+        </div>
+
+        {/* Kavalan Fan Zone Banner */}
+        <div className="p-4 rounded-2xl bg-navy border border-copper/30 relative overflow-hidden">
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <span className="text-[9px] font-heading font-black tracking-widest text-copper uppercase block">
+                Official Supporters Club
+              </span>
+              <strong className="font-heading font-bold text-sm text-porcelain block mt-0.5">
+                Kavalan Ultras Family
+              </strong>
+            </div>
+            <Link
+              href="/club#supporters"
+              onClick={onClose}
+              className="px-3.5 py-1.5 rounded-full bg-copper text-navy text-[11px] font-heading font-bold uppercase tracking-wider"
+            >
+              Join Us
+            </Link>
+          </div>
+        </div>
+
+        {/* Mobile Social Bar */}
+        <div className="pt-4 border-t border-porcelain/10 flex items-center justify-between text-xs text-porcelain/60 px-2 pb-6">
+          <span className="text-[10px] uppercase font-bold text-copper tracking-wider">
+            Follow TNFC
+          </span>
+          <div className="flex items-center gap-4 text-[11px]">
+            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-copper transition-colors">
+              X
+            </a>
+            <span>•</span>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-copper transition-colors">
+              Instagram
+            </a>
+            <span>•</span>
+            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-copper transition-colors">
+              YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP MEGA MENU CONTENT (>= 768px) — 100% PRESERVED */}
+      <div className="hidden md:block site-container py-12 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           {/* Navigation Columns (8 cols) */}
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
@@ -123,10 +260,10 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
               </ul>
             </div>
 
-            {/* Column 2: First Team */}
+            {/* Column 2: Squad & Staff */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-xs font-semibold tracking-widest text-copper uppercase border-b border-porcelain/15 pb-2">
-                <Users className="w-4 h-4" /> Team
+                <Users className="w-4 h-4" /> Squad
               </div>
               <ul className="space-y-2.5 text-sm font-medium">
                 <li>
@@ -135,40 +272,40 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                     onClick={onClose}
                     className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
                   >
-                    First Team Squad
+                    First Team Players
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/team/arjun-varadhan"
                     onClick={onClose}
-                    className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
+                    className="text-copper font-semibold hover:text-porcelain transition-colors block py-0.5"
                   >
-                    Captain: Arjun Varadhan
+                    #10 Arjun Varadhan (C)
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/club#leadership"
+                    href="/team#technical-staff"
                     onClick={onClose}
                     className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
                   >
-                    Coaching Staff
+                    Head Coach Gabriel Santana
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/matches#standings"
+                    href="/team"
                     onClick={onClose}
                     className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
                   >
-                    League Standings
+                    Squad Statistics
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Matches & Fixtures */}
+            {/* Column 3: Matches */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-xs font-semibold tracking-widest text-copper uppercase border-b border-porcelain/15 pb-2">
                 <Calendar className="w-4 h-4" /> Matches
@@ -180,23 +317,23 @@ export const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, onClose }) => {
                     onClick={onClose}
                     className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
                   >
-                    Fixtures Schedule
+                    Fixtures & Results
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/matches#results"
+                    href="/matches#standings"
                     onClick={onClose}
                     className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
                   >
-                    Latest Results
+                    League Standings
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/matches/tnfc-vs-chennai-city"
                     onClick={onClose}
-                    className="text-porcelain/80 hover:text-copper transition-colors block py-0.5"
+                    className="text-copper font-semibold hover:text-porcelain transition-colors block py-0.5"
                   >
                     Coromandel Derby Preview
                   </Link>

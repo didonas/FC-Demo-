@@ -52,10 +52,10 @@ export default function MatchesPage() {
       </section>
 
       {/* Main Tabs Navigation Bar */}
-      <section className="sticky top-[80px] md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-3.5">
-        <div className="site-container flex flex-col sm:flex-row items-center justify-between gap-4">
+      <section className="sticky top-16 md:top-[88px] z-30 bg-porcelain-50/95 backdrop-blur-md border-b border-porcelain-300 py-2.5 sm:py-3.5">
+        <div className="site-container flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
           {/* Main Tab Controls */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
             {[
               { id: "fixtures", label: "Upcoming Fixtures" },
               { id: "results", label: "Recent Results" },
@@ -64,7 +64,7 @@ export default function MatchesPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all ${
+                className={`shrink-0 px-4 sm:px-5 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
                   activeTab === tab.id
                     ? "bg-navy text-porcelain shadow-sm"
                     : "bg-porcelain-200/70 hover:bg-porcelain-300 text-navy/80"
@@ -79,12 +79,12 @@ export default function MatchesPage() {
           {activeTab !== "standings" && (
             <div className="flex items-center gap-2">
               <span className="text-xs text-navy/60 font-medium hidden md:inline">Competition:</span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 sm:pb-0">
                 {competitions.map((comp) => (
                   <button
                     key={comp}
                     onClick={() => setSelectedCompetition(comp)}
-                    className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-colors ${
+                    className={`shrink-0 whitespace-nowrap px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-colors ${
                       selectedCompetition === comp
                         ? "bg-copper text-navy font-bold"
                         : "bg-porcelain-200 text-navy/70 hover:text-navy"
@@ -167,7 +167,7 @@ export default function MatchesPage() {
                 </div>
 
                 {/* Venue & Action Buttons */}
-                <div className="pt-6 border-t border-porcelain-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="pt-5 sm:pt-6 border-t border-porcelain-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
                   <div className="flex items-center gap-2 text-xs text-navy/60">
                     <MapPin className="w-4 h-4 text-copper" />
                     <span>{match.stadium}, {match.city}</span>
@@ -183,7 +183,7 @@ export default function MatchesPage() {
                     {match.ticketsAvailable && (
                       <Link
                         href={`/tickets/${match.id}`}
-                        className="px-5 py-2.5 rounded-full bg-navy hover:bg-copper text-porcelain text-xs font-heading font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
+                        className="w-full sm:w-auto justify-center px-5 py-2.5 rounded-full bg-navy hover:bg-copper text-porcelain text-xs font-heading font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
                       >
                         <Ticket className="w-3.5 h-3.5 text-copper" />
                         <span>Tickets From ₹{match.ticketStartingPrice}</span>
@@ -274,7 +274,7 @@ export default function MatchesPage() {
               </div>
 
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs sm:text-sm">
+                <table className="w-full min-w-[580px] text-left text-xs sm:text-sm">
                   <thead className="bg-porcelain-100/70 border-b border-porcelain-200 text-[11px] font-heading font-bold text-navy/70 uppercase tracking-wider">
                     <tr>
                       <th className="py-3 px-4 text-center">Pos</th>

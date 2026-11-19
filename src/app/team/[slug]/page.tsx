@@ -101,7 +101,7 @@ export default async function PlayerProfilePage({ params }: PlayerPageProps) {
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <Link
                   href="/store/home-kit-2026-heritage"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
+                  className="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow-md"
                 >
                   <ShoppingBag className="w-4 h-4 text-copper" />
                   <span>Shop #{player.shirtNumber} {player.name} Jersey</span>

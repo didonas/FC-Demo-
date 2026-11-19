@@ -133,7 +133,7 @@ export default function TicketsPage() {
                 </div>
 
                 {/* Price & Book Action */}
-                <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0 w-full sm:w-auto">
                   <div className="text-center sm:text-right">
                     <span className="text-[10px] uppercase font-bold text-navy/50 tracking-wider block">
                       Starting From
@@ -145,7 +145,7 @@ export default function TicketsPage() {
 
                   <Link
                     href={`/tickets/${match.id}`}
-                    className="px-6 py-3.5 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-lg"
+                    className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-full bg-navy hover:bg-copper text-porcelain font-heading font-bold text-xs uppercase tracking-wider transition-all duration-300 flex items-center gap-2 shadow-md hover:shadow-lg"
                   >
                     <Ticket className="w-4 h-4 text-copper" />
                     <span>Choose Seats</span>
